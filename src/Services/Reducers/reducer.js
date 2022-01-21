@@ -10,18 +10,18 @@ export default function cardItems(state = initialState, action) {
 
   switch (action.type) {
     case 'ADD_TO_CART':
-      // console.log(state.totalItems);
+      console.log(action.data);
       const theItem = state.cartItems.find(product => product.product_id === action.data.product_id);
       if (theItem) {
         // console.log('matched');
-        return { ...state, totalItems: state.totalItems + 1, totalAmount:theItem.quantity * theItem.mrp, cartItems: state.cartItems.map(item => item.product_id === action.data.product_id ? { ...item, quantity: item.quantity + 1, } : item) }
+        return { ...state, totalItems: state.totalItems + 1, totalAmount:  state.totalAmount + theItem.mrp, cartItems: state.cartItems.map(item => item.product_id === action.data.product_id ? { ...item, quantity: item.quantity + 1, } : item) }
       } else {
         // console.log(action.data);
         return {
           ...state,
           cartItems: [...state.cartItems, action.data],
           totalItems: state.totalItems + 1,
-          totalAmount:action.data.mrp * 1,
+          totalAmount: state.totalAmount + action.data.mrp,
         };
       }
       break;
@@ -32,14 +32,17 @@ export default function cardItems(state = initialState, action) {
       if (theItem2) {
         // console.log('matched');
         if (theItem2.quantity > 1) {
-          return { ...state, totalItems: state.totalItems - 1, cartItems: state.cartItems.map(item => item.product_id === action.data.product_id ? { ...item, quantity: item.quantity - 1, } : item) }
+          console.log('> 1');
+          return { ...state, totalItems: state.totalItems - 1, totalAmount: state.totalAmount - theItem2.mrp, cartItems: state.cartItems.map(item => item.product_id === action.data.product_id ? { ...item, quantity: item.quantity - 1, } : item) }
         } else {
+          console.log('< 1');
           return {
             ...state,
             cartItems: state.cartItems.filter((curElem) => {
               return curElem.product_id !== theItem2.product_id;
             }),
             totalItems: state.totalItems - 1,
+            totalAmount: state.totalAmount - theItem2.mrp,
           }
         }
 

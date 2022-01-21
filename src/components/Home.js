@@ -20,7 +20,7 @@ function Home(props) {
                     <div className="qty mt-5">
                       <button className="minus" onClick={() => props.ramovefromocartHandler({ product_id: curItem.product_id})}>-</button>
                       <input type="text" disabled={true} className="countdown" value={0} />
-                      <button className="plus btn-btn-primary" onClick={() => props.addTocartHandler({ product_id: curItem.product_id,mrp:curItem.mmd_price, name: curItem.product_name, quantity: 1 })}>+</button>
+                      <button className="plus btn-btn-primary" onClick={() => props.addTocartHandler({ product_id: curItem.product_id,mrp:curItem.mrp, name: curItem.product_name, quantity: 1 })}>+</button>
                     </div>
                   </div>
                   <div className="product-action-2">

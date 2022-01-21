@@ -40,7 +40,7 @@ function Cart(props) {
                     <div className="bottom">
                         <div className="total">
                             <span>Total</span>
-                            <span className="total-amount">$134.00</span>
+                            <span className="total-amount">$ {props.data.totalAmount}</span>
                         </div>
                         <a href="checkout.html" className="btn animate">Checkout</a>
                     </div>
