@@ -1,4 +1,6 @@
 // import { ADD_TO_CART } from "../../constants"
+import React, { useEffect, useState } from "react";
+
 
 const initialState = {
   cartItems: [],
@@ -8,21 +10,38 @@ const initialState = {
 
 export default function cardItems(state = initialState, action) {
 
+  // useState(()=>{
+
+  // })
+
+  //let data =state.cartItems;
+  // const saveState = (data) => {
+  //   try {
+  //    // console.log(state);
+  //     const serializedState = JSON.stringify(data);
+  //     localStorage.setItem('state', serializedState);
+  //   } catch (e) {
+  //     // Ignore write errors;
+  //   }
+  // };
+
   switch (action.type) {
     case 'ADD_TO_CART':
-      console.log(action.data);
+
+      // console.log(action.data);
       const theItem = state.cartItems.find(product => product.product_id === action.data.product_id);
       if (theItem) {
-        // console.log('matched');
-        return { ...state, totalItems: state.totalItems + 1, totalAmount:  state.totalAmount + theItem.mrp, cartItems: state.cartItems.map(item => item.product_id === action.data.product_id ? { ...item, quantity: item.quantity + 1, } : item) }
+        //saveState(state.cartItems);
+        return { ...state, totalItems: state.totalItems + 1, totalAmount: state.totalAmount + theItem.mrp, cartItems: state.cartItems.map(item => item.product_id === action.data.product_id ? { ...item, quantity: item.quantity + 1, } : item) }
       } else {
-        // console.log(action.data);
+        //saveState(state.cartItems);
         return {
           ...state,
           cartItems: [...state.cartItems, action.data],
           totalItems: state.totalItems + 1,
           totalAmount: state.totalAmount + action.data.mrp,
         };
+        
       }
       break;
 

@@ -16,19 +16,18 @@ function Contextcart() {
     //     data: null
     // })
     // console.log(product.data);
+    
     // useEffect(() => {
     //     setProduct({
     //         data: null
     //     })
     //     axios.get(url).then(response => {
-
     //         setProduct({
     //             data: response.data.entries
     //         })
     //     }).catch((err) => {
     //         console.log(err);
     //     })
-
 
     // }, [url])
 
