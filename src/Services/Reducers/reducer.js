@@ -51,10 +51,10 @@ export default function cardItems(state = initialState, action) {
       if (theItem2) {
         // console.log('matched');
         if (theItem2.quantity > 1) {
-          console.log('> 1');
+         // console.log('> 1');
           return { ...state, totalItems: state.totalItems - 1, totalAmount: state.totalAmount - theItem2.mrp, cartItems: state.cartItems.map(item => item.product_id === action.data.product_id ? { ...item, quantity: item.quantity - 1, } : item) }
         } else {
-          console.log('< 1');
+         // console.log('< 1');
           return {
             ...state,
             cartItems: state.cartItems.filter((curElem) => {

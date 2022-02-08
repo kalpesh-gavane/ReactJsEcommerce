@@ -8,41 +8,56 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function Home(props) {
+
+  useState(() => {
+    const serializedState = localStorage.getItem('state');
+    const statedata = JSON.parse(serializedState);
+    console.log(statedata);
+    if (statedata) {
+      //  console.log(statedata.data.cartItems);
+      if (statedata.cartItems.length > 0) {
+        props.data.cartItems = statedata.cartItems;
+        props.data.totalAmount = statedata.totalAmount;
+        props.data.totalItems = statedata.totalItems;
+      }
+    }
+
+  })
   // toast.success("Success Notification !");
 
   //console.log(props);
-
-  if (props.data.cartItems.length > 0) {
+  //console.log(props.data.cartItems.length);
+  if (props.data.cartItems.length >= 0) {
     try {
-      // console.log('if');
-      const serializedState = JSON.stringify(props);
-      localStorage.setItem('state', serializedState);
+      //  console.log(props.data);
+      if (props.data.cartItems.length == 0) {
+        // console.log('0');
+        const serializedState = JSON.stringify(props.data);
+        localStorage.setItem('state', serializedState);
+      } else {
+        const serializedState = JSON.stringify(props.data);
+        localStorage.setItem('state', serializedState);
+      }
+
     } catch (e) {
       // Ignore write errors;
     }
   }
 
-  useState(() => {
-    const serializedState = localStorage.getItem('state');
-    const statedata = JSON.parse(serializedState);
-    //  console.log(statedata);
-    if (statedata) {
-      //  console.log(statedata.data.cartItems);
-      if (statedata.data.cartItems.length > 0) {
-        props.data.cartItems = statedata.data.cartItems;
-        props.data.totalAmount = statedata.data.totalAmount;
-        props.data.totalItems = statedata.data.totalItems;
-      }
-    }
 
-  })
 
   const showToast = (type) => {
     // console.log(type);
-    if (type == 'add') {
-      toast.success('Item Added');
-    } else {
-      toast.error('Item Removed');
+    if (props.data.cartItems.length >= 0) {
+      if (type == 'add') {
+        if (props.data.cartItems.length == 0 || props.data.cartItems.length > 0) {
+          toast.success('Item Added');
+        }
+      } else {
+        if (props.data.cartItems.length > 0) {
+        toast.error('Item Removed');
+        }
+      }
     }
 
   };
@@ -67,14 +82,14 @@ function Home(props) {
   // const url = 'https://api.publicapis.org/entries';
   let productcontent = null
 
-  // const [product, setProduct] = useState({
-  //   data: null
-  // })
+  const [product, setProduct] = useState({
+    data: null
+  })
 
   // useEffect(() => {
-  //   setProduct({
-  //     data: null
-  //   })
+  //   // setProduct({
+  //   //   data: null
+  //   // })
 
   //   axios.get('https://api.publicapis.org/entries').then(response => {
   //     setProduct({
@@ -146,7 +161,7 @@ function Home(props) {
       <ToastContainer
         position="top-center"
         title='success'
-        autoClose={5000}
+        autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
