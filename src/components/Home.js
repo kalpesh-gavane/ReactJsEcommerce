@@ -5,14 +5,18 @@ import logo from './logo.svg';
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useQuantity } from "../Hook/useQuantity";
 
+const Home = (props) => {
 
-function Home(props) {
+ // console.log(products);
+
+  const [count, setCount] = useState(0);
 
   useState(() => {
     const serializedState = localStorage.getItem('state');
     const statedata = JSON.parse(serializedState);
-    console.log(statedata);
+    // console.log(statedata);
     if (statedata) {
       //  console.log(statedata.data.cartItems);
       if (statedata.cartItems.length > 0) {
@@ -23,10 +27,7 @@ function Home(props) {
     }
 
   })
-  // toast.success("Success Notification !");
 
-  //console.log(props);
-  //console.log(props.data.cartItems.length);
   if (props.data.cartItems.length >= 0) {
     try {
       //  console.log(props.data);
@@ -44,9 +45,24 @@ function Home(props) {
     }
   }
 
+  const handleClick = (item, increment) => {
+   // setCount(count + 1);
+  
+   setCount((prevState) => {
+      const theItem = products.find(product => product.product_id === item.product_id);
+      if (theItem) {
+        console.log(item.product_id);
+        return {
+          products: products.map(oldItem => oldItem.product_id === item.product_id ?
+            { ...oldItem, voteCount: 9} :
+            oldItem)
+         }
+      }   
+    });
 
+  };
 
-  const showToast = (type) => {
+  const showToast = (type, curItem) => {
     // console.log(type);
     if (props.data.cartItems.length >= 0) {
       if (type == 'add') {
@@ -54,8 +70,9 @@ function Home(props) {
           toast.success('Item Added');
         }
       } else {
-        if (props.data.cartItems.length > 0) {
-        toast.error('Item Removed');
+        const theItem = props.data.cartItems.find(product => product.product_id === curItem.product_id);
+        if (theItem) {
+          toast.error('Item Removed');
         }
       }
     }
@@ -142,22 +159,19 @@ function Home(props) {
 
   // }
 
-  // const [counter, setCounter] = useState(1);
-  // const incrementCounter = () => setCounter(counter + 1);
-  // let decrementCounter = () => setCounter(counter - 1);
 
-  // if (counter <= 1) {
-  //   decrementCounter = () => setCounter(1);
+  // const handleVoteChange = (item, increment) => {
+  //   const theItem = products.find(product => product.product_id === item.product_id);
+
+  //   if (theItem) {
+  //     this.setState(() => {
+  //       products.map(oldItem => oldItem.product_id === item.product_id ? { ...oldItem, voteCount: 5 } : oldItem)
+  //     });
+  //   }
   // }
 
-  //console.log(counter);
-  // let {data} = props;
-  //console.warn(props.data);
-
   return (
-
     <div className='row'>
-
       <ToastContainer
         position="top-center"
         title='success'
@@ -184,13 +198,15 @@ function Home(props) {
 
                     <div className="qty mt-5">
                       <button className="minus" onClick={() => {
-                        showToast('minus');
+                        showToast('minus', curItem);
+                        handleClick(curItem, -1);
                         props.ramovefromocartHandler({ product_id: curItem.product_id })
                       }}>-</button>
-                      <input type="text" disabled={true} className="countdown" value={0} />
+                      <input type="text" disabled={true} value={curItem.voteCount} className="countdown" />
                       <button className="plus btn-btn-primary" onClick={() => {
-
-                        showToast('add');
+                        showToast('add', curItem);
+                        handleClick(curItem, 1);
+                        // handleVoteChange(curItem, 1);
                         props.addTocartHandler({ product_id: curItem.product_id, mrp: curItem.mrp, name: curItem.product_name, quantity: 1 });
                       }}>+</button>
                     </div>

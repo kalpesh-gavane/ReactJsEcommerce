@@ -1,7 +1,6 @@
 // import { ADD_TO_CART } from "../../constants"
 import React, { useEffect, useState } from "react";
 
-
 const initialState = {
   cartItems: [],
   totalAmount: 0,
@@ -10,38 +9,20 @@ const initialState = {
 
 export default function cardItems(state = initialState, action) {
 
-  // useState(()=>{
-
-  // })
-
-  //let data =state.cartItems;
-  // const saveState = (data) => {
-  //   try {
-  //    // console.log(state);
-  //     const serializedState = JSON.stringify(data);
-  //     localStorage.setItem('state', serializedState);
-  //   } catch (e) {
-  //     // Ignore write errors;
-  //   }
-  // };
-
   switch (action.type) {
     case 'ADD_TO_CART':
-
       // console.log(action.data);
       const theItem = state.cartItems.find(product => product.product_id === action.data.product_id);
       if (theItem) {
-        //saveState(state.cartItems);
         return { ...state, totalItems: state.totalItems + 1, totalAmount: state.totalAmount + theItem.mrp, cartItems: state.cartItems.map(item => item.product_id === action.data.product_id ? { ...item, quantity: item.quantity + 1, } : item) }
       } else {
-        //saveState(state.cartItems);
         return {
           ...state,
           cartItems: [...state.cartItems, action.data],
           totalItems: state.totalItems + 1,
           totalAmount: state.totalAmount + action.data.mrp,
         };
-        
+
       }
       break;
 
@@ -51,10 +32,10 @@ export default function cardItems(state = initialState, action) {
       if (theItem2) {
         // console.log('matched');
         if (theItem2.quantity > 1) {
-         // console.log('> 1');
+          // console.log('> 1');
           return { ...state, totalItems: state.totalItems - 1, totalAmount: state.totalAmount - theItem2.mrp, cartItems: state.cartItems.map(item => item.product_id === action.data.product_id ? { ...item, quantity: item.quantity - 1, } : item) }
         } else {
-         // console.log('< 1');
+          // console.log('< 1');
           return {
             ...state,
             cartItems: state.cartItems.filter((curElem) => {
@@ -74,8 +55,8 @@ export default function cardItems(state = initialState, action) {
         };
       }
       break;
-
-    default:
+   
+      default:
       return state
   }
 }

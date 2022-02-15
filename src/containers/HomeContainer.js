@@ -20,7 +20,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     addTocartHandler: data => dispatch(addTocart(data)),
-    ramovefromocartHandler: data => dispatch(removeFromocart(data))
+    ramovefromocartHandler: data => dispatch(removeFromocart(data)),
+
 })
 
 
