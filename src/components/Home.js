@@ -9,9 +9,8 @@ import { useQuantity } from "../Hook/useQuantity";
 
 const Home = (props) => {
 
- // console.log(products);
-
-  const [count, setCount] = useState(0);
+  const state2 = {product_count: []};
+  const [count, setCount] = useState(state2);
 
   useState(() => {
     const serializedState = localStorage.getItem('state');
@@ -45,23 +44,21 @@ const Home = (props) => {
     }
   }
 
-  const handleClick = (item, increment) => {
-   // setCount(count + 1);
-  
-   setCount((prevState) => {
-      const theItem = products.find(product => product.product_id === item.product_id);
-      if (theItem) {
-        console.log(item.product_id);
-        return {
-          products: products.map(oldItem => oldItem.product_id === item.product_id ?
-            { ...oldItem, voteCount: 9} :
-            oldItem)
-         }
-      }   
-    });
+  const  handleClick = index => {
 
+    setCount(state2 => {
+        const newState =  {...state2} //keep state immutable
+       !newState[index] && (newState[index] = 0)
+       newState[index]++
+
+       return newState
+    });
   };
 
+  // console.log(count);
+  // console.log(count['1706']);
+
+  
   const showToast = (type, curItem) => {
     // console.log(type);
     if (props.data.cartItems.length >= 0) {
@@ -184,7 +181,6 @@ const Home = (props) => {
         draggable
         pauseOnHover
       />
-
       {
         products.map((curItem) => {
           return <div className="col-xl-3 col-lg-4 col-md-4 col-12" key={curItem.product_id}>
@@ -199,13 +195,17 @@ const Home = (props) => {
                     <div className="qty mt-5">
                       <button className="minus" onClick={() => {
                         showToast('minus', curItem);
-                        handleClick(curItem, -1);
+                        handleClick(curItem.product_id);
                         props.ramovefromocartHandler({ product_id: curItem.product_id })
                       }}>-</button>
-                      <input type="text" disabled={true} value={curItem.voteCount} className="countdown" />
+                      <input type="text" disabled={true} 
+                      
+                      
+                      
+                      className="countdown" />
                       <button className="plus btn-btn-primary" onClick={() => {
                         showToast('add', curItem);
-                        handleClick(curItem, 1);
+                        handleClick(curItem.product_id);
                         // handleVoteChange(curItem, 1);
                         props.addTocartHandler({ product_id: curItem.product_id, mrp: curItem.mrp, name: curItem.product_name, quantity: 1 });
                       }}>+</button>
