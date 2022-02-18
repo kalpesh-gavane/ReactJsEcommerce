@@ -9,7 +9,7 @@ import { useQuantity } from "../Hook/useQuantity";
 
 const Home = (props) => {
 
-  const state2 = {product_count: []};
+  const state2 = { product_count: [] };
   const [count, setCount] = useState(state2);
 
   useState(() => {
@@ -44,21 +44,19 @@ const Home = (props) => {
     }
   }
 
-  const  handleClick = index => {
+  const handleClick = index => {
 
     setCount(state2 => {
-        const newState =  {...state2} //keep state immutable
-       !newState[index] && (newState[index] = 0)
-       newState[index]++
+      const newState = { ...state2 } //keep state immutable
+      !newState[index] && (newState[index] = 0)
+      newState[index]++
 
-       return newState
+      return newState
     });
   };
 
   // console.log(count);
-  // console.log(count['1706']);
-
-  
+ 
   const showToast = (type, curItem) => {
     // console.log(type);
     if (props.data.cartItems.length >= 0) {
@@ -198,10 +196,10 @@ const Home = (props) => {
                         handleClick(curItem.product_id);
                         props.ramovefromocartHandler({ product_id: curItem.product_id })
                       }}>-</button>
-                      <input type="text" disabled={true} 
-                      
-                      
-                      
+                      <input type="text" 
+                      disabled={true}
+                      value={ count[curItem.product_id] }
+
                       className="countdown" />
                       <button className="plus btn-btn-primary" onClick={() => {
                         showToast('add', curItem);
