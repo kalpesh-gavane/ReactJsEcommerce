@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 
 const Home = (props) => {
 
-  let state2 = { product_count: [] };
+  let state2 = { default:0 };
 
   const [count, setCount] = useState(state2);
 
@@ -56,7 +56,7 @@ const Home = (props) => {
     } catch (e) {
       // Ignore write errors;
     }
-    
+
   }
 
   const handleClick = (index, type) => {
