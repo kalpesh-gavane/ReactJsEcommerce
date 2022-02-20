@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import { useState } from "react";
 import { products } from './products';
 import logo from './logo.svg';
@@ -6,16 +6,29 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useQuantity } from "../Hook/useQuantity";
+import { useDispatch } from "react-redux";
 
 const Home = (props) => {
 
-  const state2 = { product_count: [] };
+  let state2 = { product_count: [] };
+
   const [count, setCount] = useState(state2);
 
   useState(() => {
     const serializedState = localStorage.getItem('state');
     const statedata = JSON.parse(serializedState);
-    // console.log(statedata);
+
+    const product_count = localStorage.getItem('counter');
+    const counter2 = JSON.parse(product_count);
+
+  // console.log(counter2);
+    setCount(state2 => {
+      const newState = counter2
+      return newState
+    });
+
+    let state2 = counter2;
+
     if (statedata) {
       //  console.log(statedata.data.cartItems);
       if (statedata.cartItems.length > 0) {
@@ -28,6 +41,7 @@ const Home = (props) => {
   })
 
   if (props.data.cartItems.length >= 0) {
+
     try {
       //  console.log(props.data);
       if (props.data.cartItems.length == 0) {
@@ -42,21 +56,37 @@ const Home = (props) => {
     } catch (e) {
       // Ignore write errors;
     }
+    
   }
 
-  const handleClick = index => {
+  const handleClick = (index, type) => {
 
-    setCount(state2 => {
-      const newState = { ...state2 } //keep state immutable
-      !newState[index] && (newState[index] = 0)
-      newState[index]++
+    if (type == 'add') {
+      setCount(state2 => {
+        const newState = { ...state2 } //keep state immutable
+        !newState[index] && (newState[index] = 0)
+        newState[index]++
+        return newState
+      });
+    } else {
+      setCount(state2 => {
+        const newState = { ...state2 } //keep state immutable
+        !newState[index] && (newState[index] = 0)
+        newState[index]--
 
-      return newState
-    });
+        return newState
+      });
+    }
+
+
   };
 
   // console.log(count);
- 
+
+  const product_count = JSON.stringify(count);
+  localStorage.setItem('counter', product_count);
+
+
   const showToast = (type, curItem) => {
     // console.log(type);
     if (props.data.cartItems.length >= 0) {
@@ -193,17 +223,17 @@ const Home = (props) => {
                     <div className="qty mt-5">
                       <button className="minus" onClick={() => {
                         showToast('minus', curItem);
-                        handleClick(curItem.product_id);
+                        handleClick(curItem.product_id, 'minus');
                         props.ramovefromocartHandler({ product_id: curItem.product_id })
                       }}>-</button>
-                      <input type="text" 
-                      disabled={true}
-                      value={ count[curItem.product_id] }
+                      <input type="text"
+                        disabled={true}
+                        value={count[curItem.product_id]}
 
-                      className="countdown" />
+                        className="countdown" />
                       <button className="plus btn-btn-primary" onClick={() => {
                         showToast('add', curItem);
-                        handleClick(curItem.product_id);
+                        handleClick(curItem.product_id, 'add');
                         // handleVoteChange(curItem, 1);
                         props.addTocartHandler({ product_id: curItem.product_id, mrp: curItem.mrp, name: curItem.product_name, quantity: 1 });
                       }}>+</button>
