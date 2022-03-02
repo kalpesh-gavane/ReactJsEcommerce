@@ -2,9 +2,10 @@ import { CartContext } from './App';
 import React, { useContext, useReducer, useState, useEffect } from 'react';
 import { reducer } from './reducer';
 
-
 function Cart(props) {
-
+    const serializedState = localStorage.getItem('state');
+    const statedata = JSON.parse(serializedState);
+    // console.log(statedata.totalItems);
 
     return (
         <div className="right-bar">
@@ -15,15 +16,16 @@ function Cart(props) {
                 <a href="#" className="single-icon"><i className="fa fa-user-circle-o" aria-hidden="true"></i></a>
             </div>
             <div className="sinlge-bar shopping">
-                <a href="#" className="single-icon"><i className="ti-bag"></i> <span className="total-count">{props.data.cartItems.length}</span></a>
+                <a href="#" className="single-icon"><i className="ti-bag"></i> <span className="total-count">{statedata.cartItems.length}</span></a>
                 <div className="shopping-item">
                     <div className="dropdown-cart-header">
-                        <span>{props.data.totalItems} Items</span>
+                        <span>{statedata.totalItems} Items</span>
                         <a href="#">View Cart</a>
                     </div>
                     <ul className="shopping-list">
+                        
                         {
-                            props.data.cartItems.map((curItem) => {
+                            statedata.cartItems.map((curItem) => {
                                 //  console.log('curItem');
                                 // console.log(curItem.name);
                                 return (
@@ -42,7 +44,7 @@ function Cart(props) {
                     <div className="bottom">
                         <div className="total">
                             <span>Total</span>
-                            <span className="total-amount">$ {props.data.totalAmount}</span>
+                            <span className="total-amount">$ {statedata.totalAmount}</span>
                         </div>
                         <a href="checkout.html" className="btn animate">Checkout</a>
                     </div>

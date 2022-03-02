@@ -1,22 +1,30 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import CartApp from './CartApp';
 import reportWebVitals from './reportWebVitals';
-import Cart from './cart';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import rootReducer from './Services/Reducers/index'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
 
-const store=createStore(rootReducer)
+const store = createStore(rootReducer)
 //console.log(store);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Header />
+  </Provider>,
+  document.getElementById('header_section')
+);
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('mens')
+  document.getElementById('default_section')
 );
 
 ReactDOM.render(
@@ -25,13 +33,6 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('cart_component')
 );
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('womens')
-// );
 
 
 

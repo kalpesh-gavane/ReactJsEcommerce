@@ -1,4 +1,4 @@
-import Cart from "../cart";
+import Cart from "../Cart";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
