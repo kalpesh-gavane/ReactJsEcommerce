@@ -2,7 +2,7 @@
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
-const About = () => {
+const Contact = () => {
 
     return (
 
@@ -90,9 +90,9 @@ const About = () => {
                 </div>
             </section>
         </div>
-        
+
     );
 
 }
 
-export default About;
+export default Contact;

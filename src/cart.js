@@ -1,8 +1,10 @@
-import { CartContext } from './App';
+import { CartContext } from './App.js';
 import React, { useContext, useReducer, useState, useEffect } from 'react';
 import { reducer } from './reducer';
 
 function Cart(props) {
+   // console.log(props);
+
     const serializedState = localStorage.getItem('state');
     const statedata = JSON.parse(serializedState);
     // console.log(statedata.totalItems);
@@ -52,7 +54,6 @@ function Cart(props) {
 
             </div>
         </div>
-
     )
 }
 

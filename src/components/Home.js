@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Home = (props) => {
 
+  //  console.log(props);
+
   let state2 = { default: 0 };
 
   const [count, setCount] = useState(state2);
@@ -197,8 +199,10 @@ const Home = (props) => {
   // }
 
   return (
+
     <div>
-        <ToastContainer
+      
+      <ToastContainer
         position="top-center"
         title='success'
         autoClose={4000}
@@ -343,7 +347,6 @@ const Home = (props) => {
                                             <input type="text"
                                               disabled={true}
                                               value={count[curItem.product_id]}
-
                                               className="countdown" />
                                             <button className="plus btn-btn-primary" onClick={() => {
                                               showToast('add', curItem);
@@ -354,10 +357,10 @@ const Home = (props) => {
                                           </div>
                                           {/* props.addTocartHandler({ product_id: curItem.product_id, mrp: curItem.mrp, name: curItem.product_name, quantity: 1 }) */}
                                           {/* <div className="qty mt-5">
-                <button className="minus" onClick={incrementCounter}>+</button>
-                <input type="text" disabled={true} className="countdown" value={counter} />
-                <button className="plus btn-btn-primary"onClick={decrementCounter}>-</button>
-              </div> */}
+                                            <button className="minus" onClick={incrementCounter}>+</button>
+                                            <input type="text" disabled={true} className="countdown" value={counter} />
+                                            <button className="plus btn-btn-primary"onClick={decrementCounter}>-</button>
+                                          </div> */}
                                         </div>
                                         <div className="product-action-2">
                                         </div>
