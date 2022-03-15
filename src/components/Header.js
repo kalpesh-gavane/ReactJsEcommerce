@@ -86,6 +86,7 @@ const Header = (props) => {
                   </div>
                 </div>
               </div>
+
               <div className="col-lg-2 col-md-3 col-12" id="cart_component">
 
               </div>
@@ -125,13 +126,17 @@ const Header = (props) => {
                             </li>
 
                             <li>
+                              
                               <a>Shop<i className="ti-angle-down"></i><span className="new">New</span></a>
                               <ul className="dropdown">
+
                                 <li>
-                                  <a>Cart</a>
+                                  <Link to='/cart'>Cart</Link>
                                 </li>
+
                                 <li>
-                                  <a>Checkout</a>
+
+                                  <Link to='/checkout'>CheckOut</Link>
                                 </li>
                               </ul>
                             </li>
@@ -139,8 +144,6 @@ const Header = (props) => {
                             <li>
 
                               <Link to='/contact'>Contact</Link>
-
-
 
                             </li>
 

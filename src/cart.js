@@ -3,7 +3,7 @@ import React, { useContext, useReducer, useState, useEffect } from 'react';
 import { reducer } from './reducer';
 
 function Cart(props) {
-   // console.log(props);
+    // console.log(props);
 
     const serializedState = localStorage.getItem('state');
     const statedata = JSON.parse(serializedState);
@@ -24,12 +24,10 @@ function Cart(props) {
                         <span>{statedata.totalItems} Items</span>
                         <a href="#">View Cart</a>
                     </div>
-                    <ul className="shopping-list">
-                        
+                    <ul  className="shopping-list">
+
                         {
                             statedata.cartItems.map((curItem) => {
-                                //  console.log('curItem');
-                                // console.log(curItem.name);
                                 return (
                                     <li key={curItem.product_id}>
                                         <a href="#" className="remove" title="Remove this item"><i className="fa fa-remove"></i></a>
@@ -48,7 +46,7 @@ function Cart(props) {
                             <span>Total</span>
                             <span className="total-amount">$ {statedata.totalAmount}</span>
                         </div>
-                        <a href="checkout.html" className="btn animate">Checkout</a>
+                        <a href="/checkout" className="btn animate">Checkout</a>
                     </div>
                 </div>
 

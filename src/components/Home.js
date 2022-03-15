@@ -638,7 +638,7 @@ const Home = (props) => {
         </div>
       </section>
 
-      <section className="shop-blog section">
+      <section  className="shop-blog section">
         <div className="container">
           <div className="row">
             <div className="col-12">
