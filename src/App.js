@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
 import HomeContainer from './containers/HomeContainer';
+import CartContainer from './containers/CartContainer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Contact from './components/Contact';
@@ -18,7 +19,7 @@ const App = (type) => {
         <Routes>
           <Route exact path='/' element={<HomeContainer />} />
           <Route exact path='/contact' element={<Contact />} />
-          <Route exact path='/cart' element={<MainCart />} />
+          <Route exact path='/cart' element={<CartContainer />} />
           <Route exact path='/checkout' element={<Checkout />} />
         </Routes>
         

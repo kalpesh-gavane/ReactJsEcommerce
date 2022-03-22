@@ -1,7 +1,7 @@
-import Cart from "../Cart";
 import App from "../App";
 import { connect } from "react-redux";
 import Header from "../components/Header";
+import Cart from "../components/Cart";
 
 const mapStateToProps = state => ({
     data: state.cardItems

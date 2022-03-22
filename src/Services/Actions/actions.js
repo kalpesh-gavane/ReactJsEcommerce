@@ -15,10 +15,10 @@ export const removeFromocart = (data) => {
         data: data
     }
 }
-export const addComponent = (data) => {
+export const removeProduct = (data) => {
     // console.log(data);
     return {
-        type: 'adddata',
+        type: 'Remove_Product',
         data: data
     }
 }

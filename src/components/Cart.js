@@ -1,6 +1,6 @@
-import { CartContext } from './App.js';
+import { CartContext } from '../App.js';
 import React, { useContext, useReducer, useState, useEffect } from 'react';
-import { reducer } from './reducer';
+import { reducer } from '../reducer';
 
 function Cart(props) {
     // console.log(props);

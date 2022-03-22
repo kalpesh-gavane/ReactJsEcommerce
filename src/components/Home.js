@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Home = (props) => {
 
-  //  console.log(props);
+   // console.log(props);
 
   let state2 = { default: 0 };
 
@@ -110,8 +110,6 @@ const Home = (props) => {
   // onClick(Event){
   //   showToast();
   // }
-
-
 
   // const level = props.data.cartItems;
   //   const [rows,setRows] = useState({
