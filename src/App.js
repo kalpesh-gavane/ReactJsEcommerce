@@ -5,7 +5,7 @@ import CartContainer from './containers/CartContainer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Contact from './components/Contact';
-import MainCart from './components/MainCart';
+import HeaderContainer from './containers/HeaderContainer';
 import Checkout from './components/Checkout';
 
 const App = (type) => {
@@ -14,7 +14,7 @@ const App = (type) => {
     <div>
       <BrowserRouter>
       
-        <Header />
+        <HeaderContainer />
 
         <Routes>
           <Route exact path='/' element={<HomeContainer />} />
@@ -28,9 +28,6 @@ const App = (type) => {
 
 
   );
-
-
-
 
 }
 

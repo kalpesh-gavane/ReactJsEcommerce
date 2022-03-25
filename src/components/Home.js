@@ -14,6 +14,8 @@ const Home = (props) => {
 
   const [count, setCount] = useState(state2);
 
+
+
   useState(() => {
     const serializedState = localStorage.getItem('state');
     const statedata = JSON.parse(serializedState);
@@ -38,6 +40,9 @@ const Home = (props) => {
         props.data.totalItems = statedata.totalItems;
       }
     }
+
+    // const product_count = JSON.stringify(count);
+    // localStorage.setItem('counter', product_count);
 
   })
 
@@ -69,7 +74,7 @@ const Home = (props) => {
         newState[index]++
         return newState
       });
-    } else {
+    } else if (type == 'minus') {
       setCount(state2 => {
         const newState = { ...state2 } //keep state immutable
         !newState[index] && (newState[index] = 0)
@@ -83,12 +88,14 @@ const Home = (props) => {
       });
     }
 
+
+
   };
 
-  // console.log(count);
-
+        
   const product_count = JSON.stringify(count);
   localStorage.setItem('counter', product_count);
+  // console.log(count);
 
   const showToast = (type, curItem) => {
     // console.log(type);

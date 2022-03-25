@@ -1,10 +1,77 @@
 // import './App.css';
-import React from 'react';
+import React ,{ useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+
 
 const Header = (props) => {
 
-  // console.log(props);
+  const serializedState = localStorage.getItem('state');
+  const statedata = JSON.parse(serializedState);
+
+  const counterState = localStorage.getItem('counter');
+  const counterdata = JSON.parse(counterState);
+
+  const [count, setCount] = useState(counterdata);
+
+  // const product_count = JSON.stringify(count);
+  // localStorage.setItem('counter', product_count);
+
+  if (props.data.cartItems.length >= 0) {
+
+    try {
+      //  console.log(props.data);
+      if (props.data.cartItems.length == 0) {
+        // console.log('0');
+        const serializedState = JSON.stringify(props.data);
+        localStorage.setItem('state', serializedState);
+      } else {
+        const serializedState = JSON.stringify(props.data);
+        localStorage.setItem('state', serializedState);
+      }
+
+    } catch (e) {
+      // Ignore write errors;
+    }
+
+  }
+
+  const showToast = (type, curItem) => {
+    // console.log(type);
+    if (statedata.cartItems.length >= 0) {
+      if (type == 'add') {
+        if (statedata.cartItems.length == 0 || statedata.cartItems.length > 0) {
+          toast.success('Item Added');
+        }
+      } else if (type == 'remove') {
+
+        setCount(count => {
+
+          const newState = { ...count } //keep state immutable
+          !newState[curItem.product_id] && (newState[curItem.product_id] = 0)
+          newState[curItem.product_id] = 0
+
+          console.log(newState);
+
+           return newState
+        });
+
+        const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
+        if (theItem) {
+
+          toast.error('Item Removed');
+        }
+
+      } else {
+        const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
+        if (theItem) {
+          toast.error('Item Removed');
+        }
+
+      }
+    }
+
+  };
 
   return (
     <div>
@@ -89,7 +156,54 @@ const Header = (props) => {
 
               <div className="col-lg-2 col-md-3 col-12" id="cart_component">
 
+                <div className="right-bar">
+                  <div className="sinlge-bar">
+                    <a href="#" className="single-icon"><i className="fa fa-heart-o" aria-hidden="true"></i></a>
+                  </div>
+                  <div className="sinlge-bar">
+                    <a href="#" className="single-icon"><i className="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                  </div>
+                  <div className="sinlge-bar shopping">
+                    <a href="#" className="single-icon"><i className="ti-bag"></i> <span className="total-count">{props.data.cartItems.length}</span></a>
+                    <div className="shopping-item">
+                      <div className="dropdown-cart-header">
+                        <span>{props.data.totalItems} Items</span>
+                        <a href="#">View Cart</a>
+                      </div>
+                      <ul className="shopping-list">
+
+                        {
+                          props.data.cartItems.map((curItem) => {
+                            return (
+                              <li key={curItem.product_id}>
+                                <a href="#" className="remove" onClick={() => {
+                                  showToast('remove', curItem);
+                                  props.removeProductHandler({ product_id: curItem.product_id, quantity: curItem.quantity, mrp: curItem.mrp })
+                                }} title="Remove this item"><i className="fa fa-remove"></i></a>
+                                <a className="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#" /></a>
+                                <h4><a href="#">{curItem.name}</a></h4>
+                                <p className="quantity">{curItem.quantity}x - <span className="amount">${curItem.mrp}</span></p>
+                              </li>
+                            )
+
+                          })
+                        }
+
+                      </ul>
+                      <div className="bottom">
+                        <div className="total">
+                          <span>Total</span>
+                          <span className="total-amount">$ {props.data.totalAmount}</span>
+                        </div>
+                        <a className="btn animate"> <Link to='/checkout'>CheckOut</Link></a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
               </div>
+
             </div>
           </div>
         </div>
@@ -126,7 +240,7 @@ const Header = (props) => {
                             </li>
 
                             <li>
-                              
+
                               <a>Shop<i className="ti-angle-down"></i><span className="new">New</span></a>
                               <ul className="dropdown">
 
