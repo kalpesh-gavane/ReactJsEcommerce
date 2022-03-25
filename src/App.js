@@ -13,9 +13,7 @@ const App = (type) => {
   return (
     <div>
       <BrowserRouter>
-      
         <HeaderContainer />
-
         <Routes>
           <Route exact path='/' element={<HomeContainer />} />
           <Route exact path='/contact' element={<Contact />} />
