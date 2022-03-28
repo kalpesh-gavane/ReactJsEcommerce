@@ -8,29 +8,37 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Home = (props) => {
 
-   // console.log(props);
+  // console.log('home');
 
-  let state2 = { default: 0 };
+  const counterState = localStorage.getItem('counter');
+  let counterdata = JSON.parse(counterState);
 
-  const [count, setCount] = useState(state2);
+  let [counterhome, setCount] = useState(counterdata);
+
+  React.useEffect(()=>{
+    console.log('called');
+    console.log(counterdata);
+    console.log(counterhome);
+    // setCount(counterdata => {
+    //   const newState = { ...counterdata } //keep state immutable
+    //   return newState
+    // });
+  });
 
 
+  // console.log(count);
+
+  // if(counterdata['1707'] == 0)
+  // setCount(counterdata => {
+  //   const newState = { ...counterdata } //keep state immutable
+  //   return newState
+  // });
+
+ // console.log(`${count['1706']}-${count['1707']}-home`);
 
   useState(() => {
     const serializedState = localStorage.getItem('state');
     const statedata = JSON.parse(serializedState);
-
-    const product_count = localStorage.getItem('counter');
-    const counter2 = JSON.parse(product_count);
-    // console.log(counter2);
-    if (counter2) {
-      setCount(state2 => {
-        const newState = counter2
-        return newState
-      });
-    }
-
-    let state2 = counter2;
 
     if (statedata) {
       //  console.log(statedata.data.cartItems);
@@ -40,9 +48,6 @@ const Home = (props) => {
         props.data.totalItems = statedata.totalItems;
       }
     }
-
-    // const product_count = JSON.stringify(count);
-    // localStorage.setItem('counter', product_count);
 
   })
 
@@ -88,12 +93,9 @@ const Home = (props) => {
       });
     }
 
-
-
   };
 
-        
-  const product_count = JSON.stringify(count);
+  const product_count = JSON.stringify(counterhome);
   localStorage.setItem('counter', product_count);
   // console.log(count);
 
@@ -113,6 +115,10 @@ const Home = (props) => {
     }
 
   };
+
+
+  // const product_count = JSON.stringify(count);
+  // localStorage.setItem('counter', product_count);
 
   // onClick(Event){
   //   showToast();
@@ -206,7 +212,7 @@ const Home = (props) => {
   return (
 
     <div>
-      
+
       <ToastContainer
         position="top-center"
         title='success'
@@ -351,7 +357,7 @@ const Home = (props) => {
                                             }}>-</button>
                                             <input type="text"
                                               disabled={true}
-                                              value={count[curItem.product_id]}
+                                              value={counterhome[curItem.product_id]}
                                               className="countdown" />
                                             <button className="plus btn-btn-primary" onClick={() => {
                                               showToast('add', curItem);
@@ -643,7 +649,7 @@ const Home = (props) => {
         </div>
       </section>
 
-      <section  className="shop-blog section">
+      <section className="shop-blog section">
         <div className="container">
           <div className="row">
             <div className="col-12">

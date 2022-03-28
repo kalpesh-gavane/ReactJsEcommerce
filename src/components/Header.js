@@ -1,5 +1,5 @@
 // import './App.css';
-import React ,{ useState } from 'react';
+import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
@@ -9,13 +9,75 @@ const Header = (props) => {
   const serializedState = localStorage.getItem('state');
   const statedata = JSON.parse(serializedState);
 
-  const counterState = localStorage.getItem('counter');
-  const counterdata = JSON.parse(counterState);
+  const [count, setCount] = useState({ default: 0 });
 
-  const [count, setCount] = useState(counterdata);
+  useState(() => {
 
-  // const product_count = JSON.stringify(count);
-  // localStorage.setItem('counter', product_count);
+    const product_count = localStorage.getItem('counter');
+    const counter2 = JSON.parse(product_count);
+
+    if (statedata) {
+      //  console.log(statedata.data.cartItems);
+      if (statedata.cartItems.length > 0) {
+        props.data.cartItems = statedata.cartItems;
+        props.data.totalAmount = statedata.totalAmount;
+        props.data.totalItems = statedata.totalItems;
+      }
+    }
+
+    // console.log(counter2);
+    if (counter2) {
+      setCount(state2 => {
+        const newState = counter2
+        return newState
+      });
+    }
+
+    let state2 = counter2;
+
+    // const product_count = JSON.stringify(count);
+    // localStorage.setItem('counter', product_count);
+
+  })
+
+  const showToast = (type, curItem) => {
+    // console.log(type);
+    if (statedata.cartItems.length >= 0) {
+      if (type == 'add') {
+        if (statedata.cartItems.length == 0 || statedata.cartItems.length > 0) {
+          toast.success('Item Added');
+        }
+      } else if (type == 'remove') {
+
+        setCount(count => {
+
+          const newState = { ...count } //keep state immutable
+          !newState[curItem.product_id] && (newState[curItem.product_id] = 0)
+          newState[curItem.product_id] = 0
+
+          // console.log(newState);
+
+          const product_count = JSON.stringify(newState);
+          localStorage.setItem('counter', product_count);
+
+          return newState
+        });
+
+        const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
+        if (theItem) {
+          toast.error('Item Removed');
+        }
+
+      } else {
+        const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
+        if (theItem) {
+          toast.error('Item Removed');
+        }
+
+      }
+    }
+
+  };
 
   if (props.data.cartItems.length >= 0) {
 
@@ -36,42 +98,10 @@ const Header = (props) => {
 
   }
 
-  const showToast = (type, curItem) => {
-    // console.log(type);
-    if (statedata.cartItems.length >= 0) {
-      if (type == 'add') {
-        if (statedata.cartItems.length == 0 || statedata.cartItems.length > 0) {
-          toast.success('Item Added');
-        }
-      } else if (type == 'remove') {
+  // console.log(`${count['1706']}-${count['1707']}-header`);
+  const counter = JSON.stringify(count);
+  localStorage.setItem('counter', counter);
 
-        setCount(count => {
-
-          const newState = { ...count } //keep state immutable
-          !newState[curItem.product_id] && (newState[curItem.product_id] = 0)
-          newState[curItem.product_id] = 0
-
-          console.log(newState);
-
-           return newState
-        });
-
-        const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
-        if (theItem) {
-
-          toast.error('Item Removed');
-        }
-
-      } else {
-        const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
-        if (theItem) {
-          toast.error('Item Removed');
-        }
-
-      }
-    }
-
-  };
 
   return (
     <div>
@@ -230,13 +260,11 @@ const Header = (props) => {
                           <ul className="nav main-menu menu navbar-nav">
 
                             <li className="">
-
                               <Link to='/'>Home</Link>
-
                             </li>
 
                             <li>
-                              <a>Product</a>
+                              <Link to='/product'>Product</Link>
                             </li>
 
                             <li>
