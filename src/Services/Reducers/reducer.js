@@ -11,11 +11,15 @@ export default function cardItems(state = initialState, action) {
 
   switch (action.type) {
     case 'ADD_TO_CART':
-      // console.log(action.data);
+
       const theItem = state.cartItems.find(product => product.product_id === action.data.product_id);
       if (theItem) {
+      //  console.log('if');
         return { ...state, totalItems: state.totalItems + 1, totalAmount: state.totalAmount + theItem.mrp, cartItems: state.cartItems.map(item => item.product_id === action.data.product_id ? { ...item, quantity: item.quantity + 1, } : item) }
       } else {
+
+       // console.log('else');
+
         return {
           ...state,
           cartItems: [...state.cartItems, action.data],
@@ -66,9 +70,9 @@ export default function cardItems(state = initialState, action) {
       )
 
       state.cartItems = nextCartitems
-     
+
       return {
-        ...state, totalItems: state.totalItems - curElem.quantity, totalAmount: state.totalAmount - curElem.mrp*curElem.quantity,
+        ...state, totalItems: state.totalItems - curElem.quantity, totalAmount: state.totalAmount - curElem.mrp * curElem.quantity,
       };
       break;
     default:

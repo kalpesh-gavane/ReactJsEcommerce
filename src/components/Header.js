@@ -1,8 +1,7 @@
 // import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-
 
 const Header = (props) => {
 
@@ -27,10 +26,17 @@ const Header = (props) => {
 
     // console.log(counter2);
     if (counter2) {
+      // console.log('if');
       setCount(state2 => {
         const newState = counter2
         return newState
       });
+
+
+    } else {
+      // console.log('else');
+      const test = JSON.stringify(count);
+      localStorage.setItem('counter', test);
     }
 
     let state2 = counter2;
@@ -39,6 +45,8 @@ const Header = (props) => {
     // localStorage.setItem('counter', product_count);
 
   })
+
+  // console.log(count);
 
   const showToast = (type, curItem) => {
     // console.log(type);
@@ -49,17 +57,23 @@ const Header = (props) => {
         }
       } else if (type == 'remove') {
 
-        setCount(count => {
+        const product_count = localStorage.getItem('counter');
+        const counter2 = JSON.parse(product_count);
 
+        setCount(state2 => {
+          const newState = counter2
+          return newState
+        });
+
+        setCount(count => {
           const newState = { ...count } //keep state immutable
           !newState[curItem.product_id] && (newState[curItem.product_id] = 0)
-          newState[curItem.product_id] = 0
-
-          // console.log(newState);
-
-          const product_count = JSON.stringify(newState);
-          localStorage.setItem('counter', product_count);
-
+          //  console.log(newState);
+          if (newState[curItem.product_id] > 0) {
+            newState[curItem.product_id] = 0
+            const product_count = JSON.stringify(newState);
+            localStorage.setItem('counter', product_count);
+          }
           return newState
         });
 
@@ -78,6 +92,18 @@ const Header = (props) => {
     }
 
   };
+
+  useState(() => {
+    if (statedata) {
+      //  console.log(statedata.data.cartItems);
+      if (statedata.cartItems.length > 0) {
+        props.data.cartItems = statedata.cartItems;
+        props.data.totalAmount = statedata.totalAmount;
+        props.data.totalItems = statedata.totalItems;
+      }
+    }
+
+  })
 
   if (props.data.cartItems.length >= 0) {
 
@@ -98,10 +124,8 @@ const Header = (props) => {
 
   }
 
-  // console.log(`${count['1706']}-${count['1707']}-header`);
-  const counter = JSON.stringify(count);
-  localStorage.setItem('counter', counter);
-
+  // const product_count = JSON.stringify(count);
+  // localStorage.setItem('counter', product_count);
 
   return (
     <div>

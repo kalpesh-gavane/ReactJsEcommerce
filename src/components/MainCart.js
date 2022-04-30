@@ -108,7 +108,7 @@ const MainCart = (props) => {
     return (
         <>
             <ToastContainer
-                position="top-center"
+                position="bottom-center"
                 title='success'
                 autoClose={4000}
                 hideProgressBar={false}

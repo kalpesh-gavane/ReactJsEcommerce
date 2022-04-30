@@ -10,31 +10,28 @@ const Home = (props) => {
 
   // console.log('home');
 
+
   const counterState = localStorage.getItem('counter');
   let counterdata = JSON.parse(counterState);
 
   let [counterhome, setCount] = useState(counterdata);
 
-  React.useEffect(()=>{
-    console.log('called');
-    console.log(counterdata);
-    console.log(counterhome);
-    // setCount(counterdata => {
-    //   const newState = { ...counterdata } //keep state immutable
-    //   return newState
-    // });
-  });
-
-
+  // useEffect(() => {
+  //  setCount(counterdata => {
+  //    console.log(`${counterdata['1706']}-${counterdata['1707']}-home`);
+  //     const newState = { ...counterdata } //keep state immutable
+  //     return newState
+  //   });
+  // });
   // console.log(count);
 
-  // if(counterdata['1707'] == 0)
-  // setCount(counterdata => {
-  //   const newState = { ...counterdata } //keep state immutable
-  //   return newState
-  // });
-
- // console.log(`${count['1706']}-${count['1707']}-home`);
+  // useEffect(() => {
+  //   //When a changes we need to execute
+  //   //specific logic for a and other vars of the state.
+  //   //Which is not described here and that's the reason
+  //   //why we need 2 different useEffects
+  // ///setCount(counterdata);
+  // }, [counterdata]);
 
   useState(() => {
     const serializedState = localStorage.getItem('state');
@@ -73,13 +70,36 @@ const Home = (props) => {
   const handleClick = (index, type) => {
 
     if (type == 'add') {
+
+      const product_count = localStorage.getItem('counter');
+      const counter2 = JSON.parse(product_count);
+
       setCount(state2 => {
+        const newState = counter2
+        return newState
+      });
+
+      setCount(state2 => {
+        //console.log(state2);
         const newState = { ...state2 } //keep state immutable
         !newState[index] && (newState[index] = 0)
         newState[index]++
+
+        const product_count = JSON.stringify(newState);
+        localStorage.setItem('counter', product_count);
         return newState
       });
     } else if (type == 'minus') {
+
+      const product_count = localStorage.getItem('counter');
+      const counter2 = JSON.parse(product_count);
+
+      setCount(state2 => {
+        const newState = counter2
+        return newState
+      });
+
+
       setCount(state2 => {
         const newState = { ...state2 } //keep state immutable
         !newState[index] && (newState[index] = 0)
@@ -89,15 +109,13 @@ const Home = (props) => {
           newState[index]--
         }
 
+        const product_count = JSON.stringify(newState);
+        localStorage.setItem('counter', product_count);
         return newState
       });
     }
 
   };
-
-  const product_count = JSON.stringify(counterhome);
-  localStorage.setItem('counter', product_count);
-  // console.log(count);
 
   const showToast = (type, curItem) => {
     // console.log(type);
@@ -117,7 +135,9 @@ const Home = (props) => {
   };
 
 
-  // const product_count = JSON.stringify(count);
+  // console.log(counter2);
+
+  // const product_count = JSON.stringify(counterhome);
   // localStorage.setItem('counter', product_count);
 
   // onClick(Event){
@@ -136,6 +156,7 @@ const Home = (props) => {
 
   // console.log(props);.
   // const url = 'https://api.publicapis.org/entries';
+
   let productcontent = null
 
   const [product, setProduct] = useState({
@@ -208,6 +229,12 @@ const Home = (props) => {
   //     });
   //   }
   // }
+
+  const counter = localStorage.getItem('counter');
+  let counter2 = JSON.parse(counter);
+
+  // console.log('home');
+  // console.log(counter2);
 
   return (
 
@@ -357,7 +384,7 @@ const Home = (props) => {
                                             }}>-</button>
                                             <input type="text"
                                               disabled={true}
-                                              value={counterhome[curItem.product_id]}
+                                              value={counter2[curItem.product_id]}
                                               className="countdown" />
                                             <button className="plus btn-btn-primary" onClick={() => {
                                               showToast('add', curItem);
