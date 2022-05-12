@@ -10,7 +10,6 @@ const Home = (props) => {
 
   // console.log('home');
 
-
   const counterState = localStorage.getItem('counter');
   let counterdata = JSON.parse(counterState);
 
@@ -374,6 +373,7 @@ const Home = (props) => {
                                         <img className="default-img" src={logo} alt="#" />
                                       </a>
                                       <div className="button-head">
+
                                         <div className="product-action">
 
                                           <div className="qty mt-5">
@@ -389,17 +389,12 @@ const Home = (props) => {
                                             <button className="plus btn-btn-primary" onClick={() => {
                                               showToast('add', curItem);
                                               handleClick(curItem.product_id, 'add');
-                                              // handleVoteChange(curItem, 1);
                                               props.addTocartHandler({ product_id: curItem.product_id, mrp: curItem.mrp, name: curItem.product_name, quantity: 1 });
                                             }}>+</button>
                                           </div>
-                                          {/* props.addTocartHandler({ product_id: curItem.product_id, mrp: curItem.mrp, name: curItem.product_name, quantity: 1 }) */}
-                                          {/* <div className="qty mt-5">
-                                            <button className="minus" onClick={incrementCounter}>+</button>
-                                            <input type="text" disabled={true} className="countdown" value={counter} />
-                                            <button className="plus btn-btn-primary"onClick={decrementCounter}>-</button>
-                                          </div> */}
+                                         
                                         </div>
+                                        
                                         <div className="product-action-2">
                                         </div>
                                       </div>

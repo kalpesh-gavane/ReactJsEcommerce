@@ -49,7 +49,8 @@ const Header = (props) => {
   // console.log(count);
 
   const showToast = (type, curItem) => {
-    // console.log(type);
+
+    console.log(type);
     if (statedata.cartItems.length >= 0) {
       if (type == 'add') {
         if (statedata.cartItems.length == 0 || statedata.cartItems.length > 0) {
@@ -78,17 +79,20 @@ const Header = (props) => {
         });
 
         const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
-        
+
         if (theItem) {
           toast.error('Item Removed');
         }
+
+      } else if (type == 'cartEmpty') {
+
+        toast.error('Your Cart is Empty');
 
       } else {
         const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
         if (theItem) {
           toast.error('Item Removed');
         }
-
       }
     }
 
@@ -250,7 +254,30 @@ const Header = (props) => {
                           <span>Total</span>
                           <span className="total-amount">$ {props.data.totalAmount}</span>
                         </div>
-                        <a className="btn animate"> <Link to='/checkout'>CheckOut</Link></a>
+                        <a className="btn animate">
+                          {(
+                            () => {
+
+                              if (props.data.totalAmount > 0) {
+
+                                return (
+                                  <Link to='/checkout'>CheckOut</Link>
+                                )
+
+                              } else {
+
+                                return (
+                                  <Link to='#' onClick={() => {
+                                    showToast('cartEmpty', 'none');
+                                  }}  >CheckOut</Link>
+                                )
+                              }
+
+                            }
+                          )()}
+
+
+                        </a>
                       </div>
                     </div>
 
@@ -302,8 +329,22 @@ const Header = (props) => {
                                 </li>
 
                                 <li>
+                                  {(() => {
 
-                                  <Link to='/checkout'>CheckOut</Link>
+                                    if (props.data.cartItems.length > 0) {
+                                      return (
+                                        <Link to='/checkout'>CheckOut</Link>
+                                      )
+                                    } else {
+                                      return (
+                                        <Link to='#' onClick={() => {
+                                          showToast('cartEmpty', 'none');
+                                        }}  >CheckOut</Link>
+                                      )
+                                    }
+
+                                  })()}
+
                                 </li>
                               </ul>
                             </li>

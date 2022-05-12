@@ -226,6 +226,7 @@ function ProductsGrid(props) {
 																<a title="Wishlist" href="#"><i className=" ti-heart "></i><span>Add to Wishlist</span></a>
 																<a title="Compare" href="#"><i className="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
 															</div>
+															
 															<div className="product-action-2">
 																<a title="Add to cart" href="#">Add to cart</a>
 															</div>
