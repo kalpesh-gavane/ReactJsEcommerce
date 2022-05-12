@@ -51,7 +51,7 @@ export const products = [
     },
 
     {
-        "product_id": 1707,
+        "product_id": 1546,
         "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
         "voteCount": 0,
         "order_number": null,
@@ -103,7 +103,7 @@ export const products = [
     },
 
     {
-        "product_id": 1707,
+        "product_id": 3277,
         "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
         "voteCount": 0,
         "order_number": null,
@@ -155,7 +155,7 @@ export const products = [
     },
 
     {
-        "product_id": 1707,
+        "product_id": 1747,
         "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
         "voteCount": 0,
         "order_number": null,
@@ -207,7 +207,7 @@ export const products = [
     },
 
     {
-        "product_id": 1707,
+        "product_id": 1737,
         "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
         "voteCount": 0,
         "order_number": null,
@@ -259,7 +259,7 @@ export const products = [
     },
 
     {
-        "product_id": 1707,
+        "product_id": 155,
         "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
         "voteCount": 0,
         "order_number": null,
@@ -311,7 +311,7 @@ export const products = [
     },
 
     {
-        "product_id": 1707,
+        "product_id": 443,
         "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
         "voteCount": 0,
         "order_number": null,
@@ -363,7 +363,7 @@ export const products = [
     },
 
     {
-        "product_id": 1707,
+        "product_id": 243,
         "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
         "voteCount": 0,
         "order_number": null,
@@ -415,7 +415,7 @@ export const products = [
     },
 
     {
-        "product_id": 1707,
+        "product_id": 54,
         "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
         "voteCount": 0,
         "order_number": null,

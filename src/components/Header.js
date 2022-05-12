@@ -78,6 +78,7 @@ const Header = (props) => {
         });
 
         const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
+        
         if (theItem) {
           toast.error('Item Removed');
         }
