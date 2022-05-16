@@ -50,7 +50,7 @@ const Header = (props) => {
 
   const showToast = (type, curItem) => {
 
-    console.log(type);
+    // console.log(type);
     if (statedata.cartItems.length >= 0) {
       if (type == 'add') {
         if (statedata.cartItems.length == 0 || statedata.cartItems.length > 0) {
@@ -227,7 +227,22 @@ const Header = (props) => {
                     <div className="shopping-item">
                       <div className="dropdown-cart-header">
                         <span>{props.data.totalItems} Items</span>
-                        <a href="#">View Cart</a>
+
+                        {(() => {
+
+                          if (props.data.cartItems.length > 0) {
+                            return (
+                              <Link to='/cart'>Cart</Link>
+                            )
+                          } else {
+                            return (
+                              <Link to='#' onClick={() => {
+                                showToast('cartEmpty', 'none');
+                              }} >View Cart</Link>
+                            )
+                          }
+
+                        })()}
                       </div>
                       <ul className="shopping-list">
 
@@ -249,33 +264,32 @@ const Header = (props) => {
                         }
 
                       </ul>
+
                       <div className="bottom">
                         <div className="total">
                           <span>Total</span>
                           <span className="total-amount">$ {props.data.totalAmount}</span>
                         </div>
+
                         <a className="btn animate">
-                          {(
-                            () => {
+                          {(() => {
 
-                              if (props.data.totalAmount > 0) {
+                            if (props.data.totalAmount > 0) {
 
-                                return (
-                                  <Link to='/checkout'>CheckOut</Link>
-                                )
+                              return (
+                                <Link to='/checkout'>CheckOut</Link>
+                              )
 
-                              } else {
+                            } else {
 
-                                return (
-                                  <Link to='#' onClick={() => {
-                                    showToast('cartEmpty', 'none');
-                                  }}  >CheckOut</Link>
-                                )
-                              }
-
+                              return (
+                                <Link to='#' onClick={() => {
+                                  showToast('cartEmpty', 'none');
+                                }}  >CheckOut</Link>
+                              )
                             }
-                          )()}
 
+                          })()}
 
                         </a>
                       </div>
@@ -325,7 +339,24 @@ const Header = (props) => {
                               <ul className="dropdown">
 
                                 <li>
-                                  <Link to='/cart'>Cart</Link>
+
+                                  {(() => {
+
+                                    if (props.data.cartItems.length > 0) {
+                                      return (
+                                        <Link to='/cart'>Cart</Link>
+                                      )
+                                    } else {
+                                      return (
+                                        <Link to='#' onClick={() => {
+                                          showToast('cartEmpty', 'none');
+                                        }} >Cart</Link>
+                                      )
+                                    }
+
+                                  })()}
+
+
                                 </li>
 
                                 <li>
