@@ -31,8 +31,6 @@ const Header = (props) => {
         const newState = counter2
         return newState
       });
-
-
     } else {
       // console.log('else');
       const test = JSON.stringify(count);
@@ -114,14 +112,12 @@ const Header = (props) => {
 
     try {
       //  console.log(props.data);
-      if (props.data.cartItems.length == 0) {
-        // console.log('0');
-        const serializedState = JSON.stringify(props.data);
-        localStorage.setItem('state', serializedState);
-      } else {
-        const serializedState = JSON.stringify(props.data);
-        localStorage.setItem('state', serializedState);
-      }
+
+      const serializedState = JSON.stringify(props.data);
+      localStorage.setItem('state', serializedState);
+
+      const test = JSON.stringify({ default: 0 });
+      localStorage.setItem('counter', test);
 
     } catch (e) {
       // Ignore write errors;
