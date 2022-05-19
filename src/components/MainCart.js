@@ -107,7 +107,7 @@ const MainCart = (props) => {
   // console.log(count);
     return (
         <>
-            <ToastContainer
+            {/* <ToastContainer
                 position="bottom-center"
                 title='success'
                 autoClose={4000}
@@ -118,7 +118,7 @@ const MainCart = (props) => {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
-            />
+            /> */}
             <div className="shopping-cart section">
                 <div className="container">
                     <div className="row">

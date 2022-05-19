@@ -124,7 +124,10 @@ const Home = (props) => {
           toast.success('Item Added');
         }
       } else {
-        const theItem = props.data.cartItems.find(product => product.product_id === curItem.product_id);
+   
+        const theItem = props.data.cartItems.find(product => product.product_id === curItem.id);
+
+        console.log(curItem);
         if (theItem) {
           toast.error('Item Removed');
         }

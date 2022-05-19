@@ -310,12 +310,14 @@ function Checkout() {
                                             <input type="text" name="address" placeholder="" required="required" />
                                         </div>
                                     </div>
+                                    
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Address Line 2<span>*</span></label>
                                             <input type="text" name="address" placeholder="" required="required" />
                                         </div>
                                     </div>
+
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="form-group">
                                             <label>Postal Code<span>*</span></label>
@@ -329,9 +331,9 @@ function Checkout() {
                                             <label>Create an account?</label>
                                         </div>
                                     </div>
+
                                 </div>
                             </form>
-
                         </div>
                     </div>
                     <div class="col-lg-4 col-12">

@@ -46,7 +46,7 @@ const Header = (props) => {
 
   // console.log(count);
 
-  const showToast = (type, curItem) => {
+  const showToast2 = (type, curItem) => {
 
     // console.log(type);
     if (statedata.cartItems.length >= 0) {
@@ -87,6 +87,7 @@ const Header = (props) => {
         }
 
       } else if (type == 'cartEmpty') {
+        console.log('cart');
 
         toast.error('Your Cart is Empty');
 
@@ -134,7 +135,18 @@ const Header = (props) => {
 
   return (
     <div>
-
+  <ToastContainer
+        position="top-center"
+        title='success'
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <header className="header shop">
 
         <div className="topbar">
@@ -237,7 +249,7 @@ const Header = (props) => {
                           } else {
                             return (
                               <Link to='#' onClick={() => {
-                                showToast('cartEmpty', 'none');
+                                showToast2('cartEmpty', 'none');
                               }} >View Cart</Link>
                             )
                           }
@@ -251,7 +263,7 @@ const Header = (props) => {
                             return (
                               <li key={curItem.product_id}>
                                 <a href="#" className="remove" onClick={() => {
-                                  showToast('remove', curItem);
+                                  showToast2('remove', curItem);
                                   props.removeProductHandler({ product_id: curItem.product_id, quantity: curItem.quantity, mrp: curItem.mrp })
                                 }} title="Remove this item"><i className="fa fa-remove"></i></a>
                                 <a className="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#" /></a>
@@ -284,7 +296,7 @@ const Header = (props) => {
 
                               return (
                                 <Link to='#' onClick={() => {
-                                  showToast('cartEmpty', 'none');
+                                  showToast2('cartEmpty', 'none');
                                 }}  >CheckOut</Link>
                               )
                             }
@@ -349,7 +361,7 @@ const Header = (props) => {
                                     } else {
                                       return (
                                         <Link to='#' onClick={() => {
-                                          showToast('cartEmpty', 'none');
+                                          showToast2('cartEmpty', 'none');
                                         }} >Cart</Link>
                                       )
                                     }
@@ -369,7 +381,7 @@ const Header = (props) => {
                                     } else {
                                       return (
                                         <Link to='#' onClick={() => {
-                                          showToast('cartEmpty', 'none');
+                                          showToast2('cartEmpty', 'none');
                                         }}  >CheckOut</Link>
                                       )
                                     }
