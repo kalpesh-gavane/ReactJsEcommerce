@@ -67,12 +67,16 @@ const Header = (props) => {
         setCount(count => {
           const newState = { ...count } //keep state immutable
           !newState[curItem.product_id] && (newState[curItem.product_id] = 0)
-          //  console.log(newState);
+
           if (newState[curItem.product_id] > 0) {
             newState[curItem.product_id] = 0
+
             const product_count = JSON.stringify(newState);
             localStorage.setItem('counter', product_count);
           }
+
+          console.log(newState);
+
           return newState
         });
 
@@ -125,8 +129,8 @@ const Header = (props) => {
 
   }
 
-  // const product_count = JSON.stringify(count);
-  // localStorage.setItem('counter', product_count);
+  const product_count = JSON.stringify(count);
+  localStorage.setItem('counter', product_count);
 
   return (
     <div>

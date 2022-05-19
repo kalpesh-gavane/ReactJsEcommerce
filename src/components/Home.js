@@ -15,6 +15,23 @@ const Home = (props) => {
 
   let [counterhome, setCount] = useState(counterdata);
 
+  // useEffect(() => {
+  //  setCount(counterdata => {
+  //    console.log(`${counterdata['1706']}-${counterdata['1707']}-home`);
+  //     const newState = { ...counterdata } //keep state immutable
+  //     return newState
+  //   });
+  // });
+  // console.log(count);
+
+  // useEffect(() => {
+  //   //When a changes we need to execute
+  //   //specific logic for a and other vars of the state.
+  //   //Which is not described here and that's the reason
+  //   //why we need 2 different useEffects
+  // ///setCount(counterdata);
+  // }, [counterdata]);
+
   useState(() => {
     const serializedState = localStorage.getItem('state');
     const statedata = JSON.parse(serializedState);
@@ -33,11 +50,15 @@ const Home = (props) => {
   if (props.data.cartItems.length >= 0) {
 
     try {
-      const serializedState = JSON.stringify(props.data);
-      localStorage.setItem('state', serializedState);
-
-      const test = JSON.stringify({ default: 0 });
-      localStorage.setItem('counter', test);
+      //  console.log(props.data);
+      if (props.data.cartItems.length == 0) {
+        // console.log('0');
+        const serializedState = JSON.stringify(props.data);
+        localStorage.setItem('state', serializedState);
+      } else {
+        const serializedState = JSON.stringify(props.data);
+        localStorage.setItem('state', serializedState);
+      }
 
     } catch (e) {
       // Ignore write errors;
@@ -132,12 +153,10 @@ const Home = (props) => {
   //     const data = localStorage.setItem('newData',JSON.stringify(rows));
   //   });
 
-  // console.log(props);.
+  // const counter = localStorage.getItem('counter');
+  // let counter2 = JSON.parse(counter);
 
-  const counter = localStorage.getItem('counter');
-  let counter2 = JSON.parse(counter);
-
-  const url = 'https://api.publicapis.org/entries';
+  const url = 'https://jsonplaceholder.typicode.com/todos';
 
   let productcontent = null
 
@@ -149,10 +168,10 @@ const Home = (props) => {
     // setProduct({
     //   data: null
     // })
-    axios.get('https://api.publicapis.org/entries').then(response => {
-      //  console.log(response);
+    axios.get(url).then(response => {
+      //   console.log(response.data);
       setProduct({
-        data: response.data.entries
+        data: response.data
       })
 
     }).catch((err) => {
@@ -163,10 +182,15 @@ const Home = (props) => {
 
   //console.log(product);
 
+  
+  const counter = localStorage.getItem('counter');
+  let counter2 = JSON.parse(counter);
+
   if (product.data) {
 
     productcontent = product.data.map((curItem) => {
-      return <div className="col-xl-3 col-lg-4 col-md-4 col-12" key={curItem.product_id}>
+      // console.log(curItem.userId);
+      return <div className="col-xl-3 col-lg-4 col-md-4 col-12" key={curItem.id}>
         <div className="single-product">
           <div className="product-img">
             <a>
@@ -179,17 +203,17 @@ const Home = (props) => {
                 <div className="qty mt-5">
                   <button className="minus" onClick={() => {
                     showToast('minus', curItem);
-                    handleClick(curItem.product_id, 'minus');
-                    props.ramovefromocartHandler({ product_id: curItem.product_id })
+                    handleClick(curItem.id, 'minus');
+                    props.ramovefromocartHandler({ product_id: curItem.id })
                   }}>-</button>
                   <input type="text"
                     disabled={true}
-                    value={counter2[curItem.product_id]}
+                    value={counter2[curItem.id]}
                     className="countdown" />
                   <button className="plus btn-btn-primary" onClick={() => {
                     showToast('add', curItem);
-                    handleClick(curItem.product_id, 'add');
-                    props.addTocartHandler({ product_id: curItem.product_id, mrp: curItem.mrp, name: curItem.product_name, quantity: 1 });
+                    handleClick(curItem.id, 'add');
+                    props.addTocartHandler({ product_id: curItem.id, mrp: 15 + curItem.id, name: curItem.title, quantity: 1 });
                   }}>+</button>
                 </div>
 
@@ -201,11 +225,11 @@ const Home = (props) => {
           </div >
           <div className="product-content">
             <h3>
-              <a href="#"> {curItem.product_name}</a>
+              <a href="#"> {curItem.title}</a>
               <a href="#"></a>
             </h3>
             <div className="product-price">
-              <span>$  {curItem.mrp}</span>
+              <span>$  {15 + curItem.id}</span>
             </div>
           </div>
         </div >
@@ -213,6 +237,10 @@ const Home = (props) => {
     })
 
   }
+
+
+  // console.log('home');
+  // console.log(counter2);
 
   return (
 
@@ -324,6 +352,7 @@ const Home = (props) => {
             <div className="col-12">
               <div className="product-info">
                 <div className="nav-main">
+
                   <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item">
                       <a className="nav-link active" data-toggle="tab" href="#man" role="tab">Man</a>
@@ -332,8 +361,8 @@ const Home = (props) => {
                       <a className="nav-link" data-toggle="tab" href="#women" role="tab">Woman</a>
                     </li>
                   </ul>
-                </div>
 
+                </div>
                 <div className="tab-content" id="myTabContent">
 
                   <div className="tab-pane fade show active" id="man" role="tabpanel">
@@ -341,7 +370,10 @@ const Home = (props) => {
                       <div className="row" id="mens">
                         <div className='col-md-12'>
                           <div className='row'>
-                            {productcontent}
+
+                            {
+                             productcontent
+                            }
                           </div>
                         </div>
                       </div>
@@ -355,6 +387,7 @@ const Home = (props) => {
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
