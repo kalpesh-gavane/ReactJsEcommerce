@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import Search from './Search';
+
 
 const Header = (props) => {
 
@@ -135,7 +137,8 @@ const Header = (props) => {
 
   return (
     <div>
-  <ToastContainer
+
+      <ToastContainer
         position="top-center"
         title='success'
         autoClose={4000}
@@ -147,6 +150,7 @@ const Header = (props) => {
         draggable
         pauseOnHover
       />
+
       <header className="header shop">
 
         <div className="topbar">
@@ -185,7 +189,8 @@ const Header = (props) => {
               <div className="col-lg-2 col-md-2 col-12">
 
                 <div className="logo">
-                  <a href="index.html"><img src="images/logo.png" alt="logo" /></a>
+                  <a href="index.html">
+                    <img src="images/logo.png" alt="logo" /></a>
                 </div>
 
                 <div className="search-top">
@@ -193,7 +198,7 @@ const Header = (props) => {
 
                   <div className="search-top">
                     <form className="search-form">
-                      <input type="text" placeholder="Search here..." name="search" />
+                    <Search />
                       <button value="search" type="submit"><i className="ti-search"></i></button>
                     </form>
                   </div>
@@ -218,7 +223,7 @@ const Header = (props) => {
 
                     </div>
                     <form>
-                      <input name="search" placeholder="Search Products Here....." type="search" />
+                    <Search />
                       <button className="btnn"><i className="ti-search"></i></button>
                     </form>
                   </div>

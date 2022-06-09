@@ -8,12 +8,12 @@ import Contact from './components/Contact';
 import HeaderContainer from './containers/HeaderContainer';
 import Checkout from './components/Checkout';
 
+
 const App = (type) => {
 
   return (
     <div>
       <BrowserRouter>
-      
         <HeaderContainer />
         <Routes>
           <Route exact path='/' element={<HomeContainer />} />
@@ -22,7 +22,6 @@ const App = (type) => {
           <Route exact path='/cart' element={<CartContainer />} />
           <Route exact path='/checkout' element={<Checkout />} />
         </Routes>
-        
       </BrowserRouter>
     </div>
   );

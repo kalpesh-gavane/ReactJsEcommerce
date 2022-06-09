@@ -1,6 +1,7 @@
 import React from "react";
 import GooglePayButton from '@google-pay/button-react';
 
+
 function Checkout() {
 
     return (
