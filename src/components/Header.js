@@ -1,4 +1,4 @@
-// import './App.css';
+ import '../App.css';
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -198,8 +198,8 @@ const Header = (props) => {
 
                   <div className="search-top">
                     <form className="search-form">
-                    <Search />
-                      <button value="search" type="submit"><i className="ti-search"></i></button>
+                      <Search />
+                      
                     </form>
                   </div>
 
@@ -223,8 +223,8 @@ const Header = (props) => {
 
                     </div>
                     <form>
-                    <Search />
-                      <button className="btnn"><i className="ti-search"></i></button>
+                      <Search />
+         
                     </form>
                   </div>
                 </div>

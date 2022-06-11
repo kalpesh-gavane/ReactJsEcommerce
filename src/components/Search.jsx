@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import axios from "axios";
+import '../index.css';
 
 const handleOnHover = (result) => {
   // the item hovered
@@ -20,7 +21,7 @@ const handleOnFocus = () => {
 }
 
 const formatResult = (item) => {
-  console.log(item);
+  // console.log(item);
   return (
     <>
       <a href={item.url} target="_blank"> <span style={{ display: 'block', textAlign: 'left' }}> {item.name}</span></a>
@@ -61,12 +62,13 @@ const Search = () => {
     // });
   }
 
-  console.log(myOptions);
+  // console.log(myOptions);
 
   return (
     <>
       <div style={{ width: 400 }}>
         <ReactSearchAutocomplete
+
           items={myOptions.data}
           onSearch={handleOnSearch}
           onHover={handleOnHover}
