@@ -35,9 +35,6 @@ function ProductsGrid(props) {
 			});
 			setProduct(result);
 		}
-
-
-
 	}
 
 	return (

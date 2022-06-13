@@ -1,8 +1,10 @@
- import '../App.css';
+import '../App.css';
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import Search from './Search';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import axios from "axios";
+import '../index.css';
 
 
 const Header = (props) => {
@@ -11,6 +13,10 @@ const Header = (props) => {
   const statedata = JSON.parse(serializedState);
 
   const [count, setCount] = useState({ default: 0 });
+  const [myOptions, setMyOptions] = useState([]);
+
+  const url = 'https://pokeapi.co/api/v2/ability/?limit=20&offset=20';
+
 
   useState(() => {
 
@@ -132,6 +138,58 @@ const Header = (props) => {
 
   }
 
+  useEffect(() => {
+
+    axios.get(url).then(response => {
+      //  console.log(response.data);
+      setMyOptions({
+        data: response.data.results
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
+
+
+  }, []);
+
+
+  const handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    //console.log(string, results)
+    // axios.get(`https://makemydeals.co.in/api/product/search/${string}`).then(response => {
+    //   console.log(response.data);
+    //   setMyOptions({
+    //     data: response.data
+    //   })
+    // }).catch((err) => {
+    //   console.log(err);
+    // });
+  }
+
+  const handleOnHover = (result) => {
+    // the item hovered
+    // console.log(result)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    // console.log(product);
+  }
+
+  const handleOnFocus = () => {
+    // console.log('Focused')
+  }
+
+  const formatResult = (item) => {
+    // console.log(item);
+    return (
+      <>
+        <a href={item.url} target="_blank"> <span style={{ display: 'block', textAlign: 'left' }}> {item.name}</span></a>
+      </>
+    )
+  }
+
   const product_count = JSON.stringify(count);
   localStorage.setItem('counter', product_count);
 
@@ -193,18 +251,6 @@ const Header = (props) => {
                     <img src="images/logo.png" alt="logo" /></a>
                 </div>
 
-                <div className="search-top">
-                  <div className="top-search"><a href="#0"><i className="ti-search"></i></a></div>
-
-                  <div className="search-top">
-                    <form className="search-form">
-                      <Search />
-                      
-                    </form>
-                  </div>
-
-                </div>
-
                 <div className="mobile-nav">
                   <div className="slicknav_menu"><a href="#" aria-haspopup="true" role="button"
                     className="slicknav_btn slicknav_collapsed"><span
@@ -223,8 +269,18 @@ const Header = (props) => {
 
                     </div>
                     <form>
-                      <Search />
-         
+                      <div style={{ width: 400 }}>
+                        <ReactSearchAutocomplete
+                          items={myOptions.data}
+                          onSearch={handleOnSearch}
+                          onHover={handleOnHover}
+                          onSelect={handleOnSelect}
+                          onFocus={handleOnFocus}
+                          autoFocus
+                          formatResult={formatResult}
+                        />
+                      </div>
+
                     </form>
                   </div>
                 </div>

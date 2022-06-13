@@ -4,34 +4,10 @@ import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import axios from "axios";
 import '../index.css';
 
-const handleOnHover = (result) => {
-  // the item hovered
-  // console.log(result)
-}
-
-const handleOnSelect = (item) => {
-  // the item selected
-  console.log(item);
-
-  <a href={item.url} target="_blank"> </a>
-}
-
-const handleOnFocus = () => {
-  // console.log('Focused')
-}
-
-const formatResult = (item) => {
-  // console.log(item);
-  return (
-    <>
-      <a href={item.url} target="_blank"> <span style={{ display: 'block', textAlign: 'left' }}> {item.name}</span></a>
-    </>
-  )
-}
-
 const Search = () => {
 
   const [myOptions, setMyOptions] = useState([]);
+
   const url = 'https://pokeapi.co/api/v2/ability/?limit=20&offset=20';
 
   useEffect(() => {
@@ -41,12 +17,13 @@ const Search = () => {
       setMyOptions({
         data: response.data.results
       });
-
     }).catch((err) => {
       console.log(err);
     });
 
+
   }, []);
+
 
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
@@ -62,13 +39,37 @@ const Search = () => {
     // });
   }
 
+  const handleOnHover = (result) => {
+    // the item hovered
+    // console.log(result)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    // console.log(product);
+  }
+
+  const handleOnFocus = () => {
+    // console.log('Focused')
+  }
+
+  const formatResult = (item) => {
+    // console.log(item);
+    return (
+      <>
+        <a href={item.url} target="_blank"> <span style={{ display: 'block', textAlign: 'left' }}> {item.name}</span></a>
+      </>
+    )
+  }
+
+
+  
   // console.log(myOptions);
 
   return (
     <>
       <div style={{ width: 400 }}>
         <ReactSearchAutocomplete
-
           items={myOptions.data}
           onSearch={handleOnSearch}
           onHover={handleOnHover}
