@@ -22,3 +22,10 @@ export const removeProduct = (data) => {
         data: data
     }
 }
+export const productFilter = (data) => {
+    // console.log(data);
+    return {
+        type: 'productFilter',
+        data: data
+    }
+}

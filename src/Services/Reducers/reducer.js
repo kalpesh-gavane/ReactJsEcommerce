@@ -14,11 +14,11 @@ export default function cardItems(state = initialState, action) {
 
       const theItem = state.cartItems.find(product => product.product_id === action.data.product_id);
       if (theItem) {
-      //  console.log('if');
+        //  console.log('if');
         return { ...state, totalItems: state.totalItems + 1, totalAmount: state.totalAmount + theItem.mrp, cartItems: state.cartItems.map(item => item.product_id === action.data.product_id ? { ...item, quantity: item.quantity + 1, } : item) }
       } else {
 
-       // console.log('else');
+        // console.log('else');
 
         return {
           ...state,
@@ -62,21 +62,25 @@ export default function cardItems(state = initialState, action) {
 
     case 'Remove_Product':
       let curElem = action.data;
-
       // console.log(counterdata);
-
       const nextCartitems = state.cartItems.filter(
         cartItem => cartItem.product_id !== curElem.product_id
       )
-
       state.cartItems = nextCartitems
-
       return {
         ...state, totalItems: state.totalItems - curElem.quantity, totalAmount: state.totalAmount - curElem.mrp * curElem.quantity,
+      };
+      break;
+
+    case 'productFilter':
+      let search = action.data;
+      //console.log(action.data);
+      return {
+        ...state, search: search,
       };
       break;
     default:
       return state
   }
-  
+
 }

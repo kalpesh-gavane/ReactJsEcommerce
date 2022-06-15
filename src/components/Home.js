@@ -6,10 +6,10 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+let render = true;
+
 const Home = (props) => {
-
-  // console.log('home');
-
+ // console.log(props);
   const counterState = localStorage.getItem('counter');
   let counterdata = JSON.parse(counterState);
 
@@ -124,7 +124,7 @@ const Home = (props) => {
           toast.success('Item Added');
         }
       } else {
-   
+
         const theItem = props.data.cartItems.find(product => product.product_id === curItem.id);
 
         console.log(curItem);
@@ -163,35 +163,57 @@ const Home = (props) => {
 
   let productcontent = null
 
-  const [product, setProduct] = useState({
-    data: null
-  })
+  const [product, setProduct] = useState();
 
   useEffect(() => {
+
     // setProduct({
     //   data: null
     // })
-    axios.get(url).then(response => {
-      //   console.log(response.data);
-      setProduct({
-        data: response.data
-      })
+    // console.log('props.data.search');
+    // console.log(props.data.search);
 
-    }).catch((err) => {
-      console.log(err);
-    })
+    if (props.data.search) {
+
+    } else {
+      //console.log('else');
+      axios.get(url).then(response => {
+        //console.log(response.data);
+        setProduct(response.data);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
 
   }, [])
 
-  //console.log(product);
+  if (props.data.search && render != false) {
+   console.log('if');
+    if (render) {
+      const result = product.filter((item3) => {
+        return item3.title === 'quo adipisci enim quam ut ab';
+      });
+       console.log(result);
+      setProduct(result);
+      render = false;
+    }else{
+      axios.get(url).then(response => {
+        //console.log(response.data);
+        setProduct(response.data);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
 
-  
+  }
+
+
   const counter = localStorage.getItem('counter');
   let counter2 = JSON.parse(counter);
 
-  if (product.data) {
-
-    productcontent = product.data.map((curItem) => {
+  if (product) {
+    console.log(product);
+    productcontent = product.map((curItem) => {
       // console.log(curItem.userId);
       return <div className="col-xl-3 col-lg-4 col-md-4 col-12" key={curItem.id}>
         <div className="single-product">
@@ -375,7 +397,7 @@ const Home = (props) => {
                           <div className='row'>
 
                             {
-                             productcontent
+                              productcontent
                             }
                           </div>
                         </div>

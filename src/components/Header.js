@@ -174,7 +174,9 @@ const Header = (props) => {
 
   const handleOnSelect = (item) => {
     // the item selected
-    // console.log(product);
+    // console.log(item);
+
+    props.productFilterHandler(item.name);
   }
 
   const handleOnFocus = () => {
@@ -182,10 +184,10 @@ const Header = (props) => {
   }
 
   const formatResult = (item) => {
-    // console.log(item);
+  
     return (
       <>
-        <a href={item.url} target="_blank"> <span style={{ display: 'block', textAlign: 'left' }}> {item.name}</span></a>
+        <a  target="_blank"> <span style={{ display: 'block', textAlign: 'left' }}> {item.name}</span></a>
       </>
     )
   }

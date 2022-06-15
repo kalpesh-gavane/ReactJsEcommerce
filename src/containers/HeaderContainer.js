@@ -1,14 +1,15 @@
 
 import { connect } from "react-redux";
 import Header from "../components/Header";
-import { removeProduct } from "../Services/Actions/actions";
+import { removeProduct,productFilter } from "../Services/Actions/actions";
 
 const mapStateToProps = state => ({
     data: state.cardItems
 })
 
 const mapDispatchToProps = dispatch => ({
-    removeProductHandler: data => dispatch(removeProduct(data))
+    removeProductHandler: data => dispatch(removeProduct(data)),
+    productFilterHandler: data => dispatch(productFilter(data))
 })
 
 // console.log(state);
