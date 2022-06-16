@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 let render = true;
 
 const Home = (props) => {
- // console.log(props);
+  // console.log(props);
   const counterState = localStorage.getItem('counter');
   let counterdata = JSON.parse(counterState);
 
@@ -125,7 +125,7 @@ const Home = (props) => {
         }
       } else {
 
-        const theItem = props.data.cartItems.find(product => product.product_id === curItem.id);
+        const theItem = props.data.cartItems.find(product => product.product_id === curItem.key);
 
         console.log(curItem);
         if (theItem) {
@@ -159,7 +159,7 @@ const Home = (props) => {
   // const counter = localStorage.getItem('counter');
   // let counter2 = JSON.parse(counter);
 
-  const url = 'https://jsonplaceholder.typicode.com/todos';
+  const url = 'https://pokeapi.co/api/v2/ability/?limit=20&offset=20';
 
   let productcontent = null
 
@@ -178,8 +178,8 @@ const Home = (props) => {
     } else {
       //console.log('else');
       axios.get(url).then(response => {
-        //console.log(response.data);
-        setProduct(response.data);
+        // console.log(response.data.results);
+        setProduct(response.data.results);
       }).catch((err) => {
         console.log(err);
       });
@@ -188,20 +188,20 @@ const Home = (props) => {
   }, [])
 
   if (props.data.search && render != false) {
-   console.log('if');
+    // console.log('if');
     if (render) {
       const result = product.filter((item3) => {
-        return item3.title === 'quo adipisci enim quam ut ab';
+        return item3.name === props.data.search;
       });
-       console.log(result);
+      //console.log(result);
       setProduct(result);
       render = false;
-    }else{
+    } else {
       axios.get(url).then(response => {
         //console.log(response.data);
-        setProduct(response.data);
+        setProduct(response.data.results);
       }).catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
     }
 
@@ -212,10 +212,10 @@ const Home = (props) => {
   let counter2 = JSON.parse(counter);
 
   if (product) {
-    console.log(product);
+    // console.log(product);
     productcontent = product.map((curItem) => {
       // console.log(curItem.userId);
-      return <div className="col-xl-3 col-lg-4 col-md-4 col-12" key={curItem.id}>
+      return <div className="col-xl-3 col-lg-4 col-md-4 col-12" key={curItem.key}>
         <div className="single-product">
           <div className="product-img">
             <a>
@@ -228,17 +228,17 @@ const Home = (props) => {
                 <div className="qty mt-5">
                   <button className="minus" onClick={() => {
                     showToast('minus', curItem);
-                    handleClick(curItem.id, 'minus');
-                    props.ramovefromocartHandler({ product_id: curItem.id })
+                    handleClick(curItem.key, 'minus');
+                    props.ramovefromocartHandler({ product_id: curItem.key })
                   }}>-</button>
                   <input type="text"
                     disabled={true}
-                    value={counter2[curItem.id]}
+                    value={counter2[curItem.key]}
                     className="countdown" />
                   <button className="plus btn-btn-primary" onClick={() => {
                     showToast('add', curItem);
-                    handleClick(curItem.id, 'add');
-                    props.addTocartHandler({ product_id: curItem.id, mrp: 15 + curItem.id, name: curItem.title, quantity: 1 });
+                    handleClick(curItem.key, 'add');
+                    props.addTocartHandler({ product_id: curItem.key, mrp: 15 + curItem.key, name: curItem.title, quantity: 1 });
                   }}>+</button>
                 </div>
 
@@ -250,11 +250,11 @@ const Home = (props) => {
           </div >
           <div className="product-content">
             <h3>
-              <a href="#"> {curItem.title}</a>
+              <a href="#"> {curItem.name}</a>
               <a href="#"></a>
             </h3>
             <div className="product-price">
-              <span>$  {15 + curItem.id}</span>
+              <span>$  {15 + 43}</span>
             </div>
           </div>
         </div >
