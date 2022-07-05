@@ -2,10 +2,14 @@ import '../App.css';
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import axios from "axios";
 import '../index.css';
-
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+//import SearchBar from './SearchBar';
+// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { useLocation } from "react-router-dom";
 
 const Header = (props) => {
 
@@ -15,14 +19,12 @@ const Header = (props) => {
   const [count, setCount] = useState({ default: 0 });
   const [myOptions, setMyOptions] = useState([]);
 
-  const url = 'https://pokeapi.co/api/v2/ability/?limit=20&offset=20';
-
+  const url = 'https://allcitysolution.com/api/categories';
 
   useState(() => {
 
     const product_count = localStorage.getItem('counter');
     const counter2 = JSON.parse(product_count);
-
     if (statedata) {
       //  console.log(statedata.data.cartItems);
       if (statedata.cartItems.length > 0) {
@@ -31,7 +33,6 @@ const Header = (props) => {
         props.data.totalItems = statedata.totalItems;
       }
     }
-
     // console.log(counter2);
     if (counter2) {
       // console.log('if');
@@ -47,69 +48,6 @@ const Header = (props) => {
 
     let state2 = counter2;
 
-    // const product_count = JSON.stringify(count);
-    // localStorage.setItem('counter', product_count);
-
-  })
-
-  // console.log(count);
-
-  const showToast2 = (type, curItem) => {
-
-    // console.log(type);
-    if (statedata.cartItems.length >= 0) {
-      if (type == 'add') {
-        if (statedata.cartItems.length == 0 || statedata.cartItems.length > 0) {
-          toast.success('Item Added');
-        }
-      } else if (type == 'remove') {
-
-        const product_count = localStorage.getItem('counter');
-        const counter2 = JSON.parse(product_count);
-
-        setCount(state2 => {
-          const newState = counter2
-          return newState
-        });
-
-        setCount(count => {
-          const newState = { ...count } //keep state immutable
-          !newState[curItem.product_id] && (newState[curItem.product_id] = 0)
-
-          if (newState[curItem.product_id] > 0) {
-            newState[curItem.product_id] = 0
-
-            const product_count = JSON.stringify(newState);
-            localStorage.setItem('counter', product_count);
-          }
-
-          console.log(newState);
-
-          return newState
-        });
-
-        const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
-
-        if (theItem) {
-          toast.error('Item Removed');
-        }
-
-      } else if (type == 'cartEmpty') {
-        console.log('cart');
-
-        toast.error('Your Cart is Empty');
-
-      } else {
-        const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
-        if (theItem) {
-          toast.error('Item Removed');
-        }
-      }
-    }
-
-  };
-
-  useState(() => {
     if (statedata) {
       //  console.log(statedata.data.cartItems);
       if (statedata.cartItems.length > 0) {
@@ -120,6 +58,57 @@ const Header = (props) => {
     }
 
   })
+
+  // console.log(count);
+
+  function showToast2(type, curItem) {
+
+    // console.log(type);
+    if (statedata.cartItems.length >= 0) {
+      if (type == 'add') {
+        if (statedata.cartItems.length == 0 || statedata.cartItems.length > 0) {
+          toast.success('Item Added');
+        }
+      } else if (type == 'remove') {
+        const product_count = localStorage.getItem('counter');
+        const counter2 = JSON.parse(product_count);
+
+        setCount(count => {
+          const newState = counter2;
+          return newState;
+        });
+
+        setCount(count => {
+          const newState = { ...count }; //keep state immutable
+          !newState[curItem.product_id] && (newState[curItem.product_id] = 0);
+
+          if (newState[curItem.product_id] > 0) {
+            newState[curItem.product_id] = 0;
+
+            const product_count = JSON.stringify(newState);
+            localStorage.setItem('counter', product_count);
+          }
+
+          //console.log(newState);
+          return newState;
+        });
+
+        const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
+        if (theItem) {
+          toast.error('Item Removed');
+        }
+      } else if (type == 'cartEmpty') {
+        // console.log('cart');
+        toast.error('Your Cart is Empty');
+      } else {
+        const theItem = statedata.cartItems.find(product => product.product_id === curItem.product_id);
+        if (theItem) {
+          toast.error('Item Removed');
+        }
+      }
+    }
+
+  }
 
   if (props.data.cartItems.length >= 0) {
 
@@ -139,62 +128,25 @@ const Header = (props) => {
   }
 
   useEffect(() => {
-
     axios.get(url).then(response => {
-      //  console.log(response.data);
-      setMyOptions({
-        data: response.data.results
-      });
+      //  console.log('useEffect');
+      setMyOptions(response.data.data);
     }).catch((err) => {
       console.log(err);
     });
 
-
   }, []);
 
 
-  const handleOnSearch = (string, results) => {
-    // onSearch will have as the first callback parameter
-    // the string searched and for the second the results.
-    //console.log(string, results)
-    // axios.get(`https://makemydeals.co.in/api/product/search/${string}`).then(response => {
-    //   console.log(response.data);
-    //   setMyOptions({
-    //     data: response.data
-    //   })
-    // }).catch((err) => {
-    //   console.log(err);
-    // });
-  }
-
-  const handleOnHover = (result) => {
-    // the item hovered
-    // console.log(result)
-  }
-
-  const handleOnSelect = (item) => {
-    // the item selected
-    // console.log(item);
-
-    props.productFilterHandler(item.name);
-  }
-
-  const handleOnFocus = () => {
-    // console.log('Focused')
-  }
-
-  const formatResult = (item) => {
-  
-    return (
-      <>
-        <a  target="_blank"> <span style={{ display: 'block', textAlign: 'left' }}> {item.name}</span></a>
-      </>
-    )
+  const handleOnFocus = (value) => {
+    // console.log(value);
+    props.productFilterHandler(value);
   }
 
   const product_count = JSON.stringify(count);
   localStorage.setItem('counter', product_count);
 
+  //console.log(myOptions);
   return (
     <div>
 
@@ -262,27 +214,40 @@ const Header = (props) => {
 
                   </div>
                 </div>
+
               </div>
               <div className="col-lg-8 col-md-7 col-12">
                 <div className="search-bar-top">
                   <div className="search-bar">
-
                     <div className="nice-select"><span className="current">All Category</span>
 
                     </div>
                     <form>
-                      <div style={{ width: 400 }}>
-                        <ReactSearchAutocomplete
-                          items={myOptions.data}
-                          onSearch={handleOnSearch}
-                          onHover={handleOnHover}
-                          onSelect={handleOnSelect}
-                          onFocus={handleOnFocus}
-                          autoFocus
-                          formatResult={formatResult}
+                      <div className='main_search' style={{ width: 400 }}>
+                        <Autocomplete
+                          id="country-select-demo"
+                          sx={{ width: 400 }}
+                          options={myOptions}
+                          autoHighlight
+                          getOptionLabel={(option) => option.category_name}
+                          onChange={(event, value) => handleOnFocus(value.category_name)}
+                          renderOption={(props, option) => (
+                            <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                              {option.category_name}
+                            </Box>
+                          )}
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              label="Search Services"
+                              inputProps={{
+                                ...params.inputProps,
+                                autoComplete: 'new-password', // disable autocomplete and autofill
+                              }}
+                            />
+                          )}
                         />
                       </div>
-
                     </form>
                   </div>
                 </div>

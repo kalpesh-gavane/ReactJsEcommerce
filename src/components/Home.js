@@ -117,7 +117,7 @@ const Home = (props) => {
   };
 
   const showToast = (type, curItem) => {
-    // console.log(type);
+    //console.log(type);
     if (props.data.cartItems.length >= 0) {
       if (type == 'add') {
         if (props.data.cartItems.length == 0 || props.data.cartItems.length > 0) {
@@ -125,9 +125,9 @@ const Home = (props) => {
         }
       } else {
 
-        const theItem = props.data.cartItems.find(product => product.product_id === curItem.key);
+        const theItem = props.data.cartItems.find(product => product.product_id === curItem.category_id);
 
-        console.log(curItem);
+        // console.log(curItem);
         if (theItem) {
           toast.error('Item Removed');
         }
@@ -159,7 +159,7 @@ const Home = (props) => {
   // const counter = localStorage.getItem('counter');
   // let counter2 = JSON.parse(counter);
 
-  const url = 'https://pokeapi.co/api/v2/ability/?limit=20&offset=20';
+  const url = 'https://allcitysolution.com/api/categories';
 
   let productcontent = null
 
@@ -167,36 +167,26 @@ const Home = (props) => {
 
   useEffect(() => {
 
-    // setProduct({
-    //   data: null
-    // })
-    // console.log('props.data.search');
-    // console.log(props.data.search);
-
-    if (props.data.search) {
-
-    } else {
-      //console.log('else');
-      axios.get(url).then(response => {
-        // console.log(response.data.results);
-        setProduct(response.data.results);
-      }).catch((err) => {
-        console.log(err);
-      });
-    }
+    axios.get(url).then(response => {
+      // console.log(response.data.data);
+      setProduct(response.data.data);
+    }).catch((err) => {
+      console.log(err);
+    });
 
   }, [])
 
   if (props.data.search && render != false) {
-    // console.log('if');
+    console.log('if');
     if (render) {
       const result = product.filter((item3) => {
-        return item3.name === props.data.search;
+        return item3.category_name === props.data.search;
       });
-      //console.log(result);
+      console.log(result);
       setProduct(result);
       render = false;
     } else {
+      //console.log('else');
       axios.get(url).then(response => {
         //console.log(response.data);
         setProduct(response.data.results);
@@ -207,7 +197,6 @@ const Home = (props) => {
 
   }
 
-
   const counter = localStorage.getItem('counter');
   let counter2 = JSON.parse(counter);
 
@@ -215,7 +204,7 @@ const Home = (props) => {
     // console.log(product);
     productcontent = product.map((curItem) => {
       // console.log(curItem.userId);
-      return <div className="col-xl-3 col-lg-4 col-md-4 col-12" key={curItem.key}>
+      return <div className="col-xl-3 col-lg-4 col-md-4 col-12" key={curItem.category_id}>
         <div className="single-product">
           <div className="product-img">
             <a>
@@ -228,17 +217,17 @@ const Home = (props) => {
                 <div className="qty mt-5">
                   <button className="minus" onClick={() => {
                     showToast('minus', curItem);
-                    handleClick(curItem.key, 'minus');
-                    props.ramovefromocartHandler({ product_id: curItem.key })
+                    handleClick(curItem.category_id, 'minus');
+                    props.ramovefromocartHandler({ product_id: curItem.category_id })
                   }}>-</button>
                   <input type="text"
                     disabled={true}
-                    value={counter2[curItem.key]}
+                    value={counter2[curItem.category_id]}
                     className="countdown" />
                   <button className="plus btn-btn-primary" onClick={() => {
                     showToast('add', curItem);
-                    handleClick(curItem.key, 'add');
-                    props.addTocartHandler({ product_id: curItem.key, mrp: 15 + curItem.key, name: curItem.title, quantity: 1 });
+                    handleClick(curItem.category_id, 'add');
+                    props.addTocartHandler({ product_id: curItem.category_id, mrp: 6 + curItem.category_id, name: curItem.category_name, quantity: 1 });
                   }}>+</button>
                 </div>
 
@@ -250,11 +239,11 @@ const Home = (props) => {
           </div >
           <div className="product-content">
             <h3>
-              <a href="#"> {curItem.name}</a>
+              <a href="#"> {curItem.category_name}</a>
               <a href="#"></a>
             </h3>
             <div className="product-price">
-              <span>$  {15 + 43}</span>
+              <span>$ {curItem.category_id + 43}</span>
             </div>
           </div>
         </div >
