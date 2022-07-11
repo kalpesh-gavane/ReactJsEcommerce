@@ -1,470 +1,195 @@
-export const products = [
-    {
-        "product_id": 1706,
-        "product_name": "Parle Krack Jack 34.36G Pack Of 5",
-        "order_number": null,
-        "image": "16265202771.DD.jpg",
-        "mrp": 15,
-        "mmd_price": 46,
-        "quantity": -1,
-        "active": 1,
-        "approved": 1,
-        "min_qty": 1,
-        "max_qty": 5,
-        "size": "172 GM",
-        "voteCount": 0,
-        "featured": null,
-
-        "low_price": null,
-
-        "best_deals": null,
-        "discount": 8,
-        "points": 46,
-        "credit_points": 1,
-        "vendor_id": 26,
-        "city_id": 1,
-
-        "b2b_qty": null,
-
-        "b2b_price": null,
-        "whole_sale_price": 46,
-
-        "product_cgst_per": null,
-
-        "product_sgst_amt": null,
-
-        "product_igst_amt": null,
-
-        "product_cgst_amt": null,
-
-        "product_sgst_per": null,
-
-        "product_igst_per": null,
-        "product_cat_id": 43,
-        "product_sub_cat_id": 172,
-
-        "brand_id": null,
-        "created_at": "2021-07-17 16:41:17",
-        "updated_at": "2021-12-07 19:30:25",
-
-        "deleted_at": null
-    },
-
-    {
-        "product_id": 1546,
-        "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
-        "voteCount": 0,
-        "order_number": null,
-        "image": "16265205921.DD.jpg",
-        "mrp": 120,
-        "mmd_price": 46,
-        "quantity": 1,
-        "active": 1,
-        "approved": 1,
-        "min_qty": 1,
-        "max_qty": 5,
-        "size": "334 GM",
-
-        "featured": null,
-
-        "low_price": null,
-
-        "best_deals": null,
-        "discount": 8,
-        "points": 46,
-        "credit_points": 1,
-        "vendor_id": 26,
-        "city_id": 1,
-
-        "b2b_qty": null,
-
-        "b2b_price": null,
-        "whole_sale_price": 46,
-
-        "product_cgst_per": null,
-
-        "product_sgst_amt": null,
-
-        "product_igst_amt": null,
-
-        "product_cgst_amt": null,
-
-        "product_sgst_per": null,
-
-        "product_igst_per": null,
-        "product_cat_id": 't-shirt',
-        "product_sub_cat_id": 172,
-
-        "brand_id": null,
-        "created_at": "2021-07-17 16:46:32",
-        "updated_at": "2021-12-07 19:30:25",
-
-        "deleted_at": null
-    },
-
-    {
-        "product_id": 3277,
-        "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
-        "voteCount": 0,
-        "order_number": null,
-        "image": "16265205921.DD.jpg",
-        "mrp": 200,
-        "mmd_price": 46,
-        "quantity": 1,
-        "active": 1,
-        "approved": 1,
-        "min_qty": 1,
-        "max_qty": 5,
-        "size": "334 GM",
-
-        "featured": null,
-
-        "low_price": null,
-
-        "best_deals": null,
-        "discount": 8,
-        "points": 46,
-        "credit_points": 1,
-        "vendor_id": 26,
-        "city_id": 1,
-
-        "b2b_qty": null,
-
-        "b2b_price": null,
-        "whole_sale_price": 46,
-
-        "product_cgst_per": null,
-
-        "product_sgst_amt": null,
-
-        "product_igst_amt": null,
-
-        "product_cgst_amt": null,
-
-        "product_sgst_per": null,
-
-        "product_igst_per": null,
-        "product_cat_id": 'men',
-        "product_sub_cat_id": 172,
-
-        "brand_id": null,
-        "created_at": "2021-07-17 16:46:32",
-        "updated_at": "2021-12-07 19:30:25",
-
-        "deleted_at": null
-    },
-
-    {
-        "product_id": 1747,
-        "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
-        "voteCount": 0,
-        "order_number": null,
-        "image": "16265205921.DD.jpg",
-        "mrp": 0,
-        "mmd_price": 46,
-        "quantity": 1,
-        "active": 1,
-        "approved": 1,
-        "min_qty": 1,
-        "max_qty": 5,
-        "size": "334 GM",
-
-        "featured": null,
-
-        "low_price": null,
-
-        "best_deals": null,
-        "discount": 8,
-        "points": 46,
-        "credit_points": 1,
-        "vendor_id": 26,
-        "city_id": 1,
-
-        "b2b_qty": null,
-
-        "b2b_price": null,
-        "whole_sale_price": 46,
-
-        "product_cgst_per": null,
-
-        "product_sgst_amt": null,
-
-        "product_igst_amt": null,
-
-        "product_cgst_amt": null,
-
-        "product_sgst_per": null,
-
-        "product_igst_per": null,
-        "product_cat_id": 'men',
-        "product_sub_cat_id": 172,
-
-        "brand_id": null,
-        "created_at": "2021-07-17 16:46:32",
-        "updated_at": "2021-12-07 19:30:25",
-
-        "deleted_at": null
-    },
-
-    {
-        "product_id": 1737,
-        "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
-        "voteCount": 0,
-        "order_number": null,
-        "image": "16265205921.DD.jpg",
-        "mrp": 45,
-        "mmd_price": 46,
-        "quantity": 1,
-        "active": 1,
-        "approved": 1,
-        "min_qty": 1,
-        "max_qty": 5,
-        "size": "334 GM",
-
-        "featured": null,
-
-        "low_price": null,
-
-        "best_deals": null,
-        "discount": 8,
-        "points": 46,
-        "credit_points": 1,
-        "vendor_id": 26,
-        "city_id": 1,
-
-        "b2b_qty": null,
-
-        "b2b_price": null,
-        "whole_sale_price": 46,
-
-        "product_cgst_per": null,
-
-        "product_sgst_amt": null,
-
-        "product_igst_amt": null,
-
-        "product_cgst_amt": null,
-
-        "product_sgst_per": null,
-
-        "product_igst_per": null,
-        "product_cat_id": 'women',
-        "product_sub_cat_id": 172,
-
-        "brand_id": null,
-        "created_at": "2021-07-17 16:46:32",
-        "updated_at": "2021-12-07 19:30:25",
-
-        "deleted_at": null
-    },
-
-    {
-        "product_id": 155,
-        "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
-        "voteCount": 0,
-        "order_number": null,
-        "image": "16265205921.DD.jpg",
-        "mrp": 89,
-        "mmd_price": 46,
-        "quantity": 1,
-        "active": 1,
-        "approved": 1,
-        "min_qty": 1,
-        "max_qty": 5,
-        "size": "334 GM",
-
-        "featured": null,
-
-        "low_price": null,
-
-        "best_deals": null,
-        "discount": 8,
-        "points": 46,
-        "credit_points": 1,
-        "vendor_id": 26,
-        "city_id": 1,
-
-        "b2b_qty": null,
-
-        "b2b_price": null,
-        "whole_sale_price": 46,
-
-        "product_cgst_per": null,
-
-        "product_sgst_amt": null,
-
-        "product_igst_amt": null,
-
-        "product_cgst_amt": null,
-
-        "product_sgst_per": null,
-
-        "product_igst_per": null,
-        "product_cat_id": 'girl',
-        "product_sub_cat_id": 172,
-
-        "brand_id": null,
-        "created_at": "2021-07-17 16:46:32",
-        "updated_at": "2021-12-07 19:30:25",
-
-        "deleted_at": null
-    },
-
-    {
-        "product_id": 443,
-        "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
-        "voteCount": 0,
-        "order_number": null,
-        "image": "16265205921.DD.jpg",
-        "mrp": 65,
-        "mmd_price": 46,
-        "quantity": 1,
-        "active": 1,
-        "approved": 1,
-        "min_qty": 1,
-        "max_qty": 5,
-        "size": "334 GM",
-
-        "featured": null,
-
-        "low_price": null,
-
-        "best_deals": null,
-        "discount": 8,
-        "points": 46,
-        "credit_points": 1,
-        "vendor_id": 26,
-        "city_id": 1,
-
-        "b2b_qty": null,
-
-        "b2b_price": null,
-        "whole_sale_price": 46,
-
-        "product_cgst_per": null,
-
-        "product_sgst_amt": null,
-
-        "product_igst_amt": null,
-
-        "product_cgst_amt": null,
-
-        "product_sgst_per": null,
-
-        "product_igst_per": null,
-        "product_cat_id": 'girl',
-        "product_sub_cat_id": 172,
-
-        "brand_id": null,
-        "created_at": "2021-07-17 16:46:32",
-        "updated_at": "2021-12-07 19:30:25",
-
-        "deleted_at": null
-    },
-
-    {
-        "product_id": 243,
-        "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
-        "voteCount": 0,
-        "order_number": null,
-        "image": "16265205921.DD.jpg",
-        "mrp": 12,
-        "mmd_price": 46,
-        "quantity": 1,
-        "active": 1,
-        "approved": 1,
-        "min_qty": 1,
-        "max_qty": 5,
-        "size": "334 GM",
-
-        "featured": null,
-
-        "low_price": null,
-
-        "best_deals": null,
-        "discount": 8,
-        "points": 46,
-        "credit_points": 1,
-        "vendor_id": 26,
-        "city_id": 1,
-
-        "b2b_qty": null,
-
-        "b2b_price": null,
-        "whole_sale_price": 46,
-
-        "product_cgst_per": null,
-
-        "product_sgst_amt": null,
-
-        "product_igst_amt": null,
-
-        "product_cgst_amt": null,
-
-        "product_sgst_per": null,
-
-        "product_igst_per": null,
-        "product_cat_id": 'boy',
-        "product_sub_cat_id": 172,
-
-        "brand_id": null,
-        "created_at": "2021-07-17 16:46:32",
-        "updated_at": "2021-12-07 19:30:25",
-
-        "deleted_at": null
-    },
-
-    {
-        "product_id": 54,
-        "product_name": "Parle Monaco Classic 66.7G Pack Of 5",
-        "voteCount": 0,
-        "order_number": null,
-        "image": "16265205921.DD.jpg",
-        "mrp": 70,
-        "mmd_price": 46,
-        "quantity": 1,
-        "active": 1,
-        "approved": 1,
-        "min_qty": 1,
-        "max_qty": 5,
-        "size": "334 GM",
-
-        "featured": null,
-
-        "low_price": null,
-
-        "best_deals": null,
-        "discount": 8,
-        "points": 46,
-        "credit_points": 1,
-        "vendor_id": 26,
-        "city_id": 1,
-
-        "b2b_qty": null,
-
-        "b2b_price": null,
-        "whole_sale_price": 46,
-
-        "product_cgst_per": null,
-
-        "product_sgst_amt": null,
-
-        "product_igst_amt": null,
-
-        "product_cgst_amt": null,
-
-        "product_sgst_per": null,
-
-        "product_igst_per": null,
-        "product_cat_id": 'boy',
-        "product_sub_cat_id": 172,
-
-        "brand_id": null,
-        "created_at": "2021-07-17 16:46:32",
-        "updated_at": "2021-12-07 19:30:25",
-
-        "deleted_at": null
-    },
-
-]
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import logo from './logo.svg';
+import { toast } from 'react-toastify';
+import Toaster from "./Toaster";
+import 'react-toastify/dist/ReactToastify.css';
+
+let render = true;
+
+const Products = (props) => {
+    //console.log(props);
+
+    const url = 'https://allcitysolution.com/api/categories';
+
+    const getData = () => {
+        const counterState = localStorage.getItem('counter');
+        return JSON.parse(counterState);
+    }
+
+    const setData = (data) => {
+        const serializedState = JSON.stringify(data);
+        localStorage.setItem('counter', serializedState);
+    }
+
+    let [counterhome, setCount] = useState(getData());
+    let productcontent = null;
+    const [product, setProduct] = useState();
+
+    useState(() => {
+
+        const serializedState = localStorage.getItem('state');
+        const statedata = JSON.parse(serializedState);
+
+        if (statedata) {
+            //  console.log(statedata.data.cartItems);
+            if (statedata.cartItems.length > 0) {
+                props.data.cartItems = statedata.cartItems;
+                props.data.totalAmount = statedata.totalAmount;
+                props.data.totalItems = statedata.totalItems;
+            }
+        }
+
+    })
+
+    useEffect(() => {
+        axios.get(url).then(response => {
+            setProduct(response.data.data);
+        }).catch((err) => {
+            console.log(err);
+        });
+
+    }, []);
+
+    const showToast = (type, curItem) => {
+        //console.log(type);
+        if (props.data.cartItems.length >= 0) {
+            if (type === 'add') {
+                if (props.data.cartItems.length === 0 || props.data.cartItems.length > 0) {
+                    toast.success('Item Added');
+                }
+            } else {
+
+                const theItem = props.data.cartItems.find(product => product.product_id === curItem.category_id);
+
+                // console.log(curItem);
+                if (theItem) {
+                    toast.error('Item Removed');
+                }
+            }
+        }
+
+    };
+
+    const handleClick = (index, type) => {
+
+        if (type === 'add') {
+            const counter2 = getData();
+            setCount(state2 => {
+                const newState = counter2
+                return newState
+            });
+            setCount(state2 => {
+                const newState = { ...state2 } //keep state immutable
+                !newState[index] && (newState[index] = 0)
+                newState[index]++;
+                setData(newState);
+                return newState
+            });
+        } else if (type === 'minus') {
+            const counter2 = getData();
+            setCount(state2 => {
+                const newState = counter2
+                return newState
+            });
+
+            setCount(state2 => {
+                const newState = { ...state2 } //keep state immutable
+                !newState[index] && (newState[index] = 0)
+
+                if (newState[index] > 0) {
+                    newState[index]--
+                }
+
+                setData(newState);
+                return newState
+            });
+        }
+
+    };
+
+    if (props.data.search === 'EVENT MANAGEMENT') {
+
+        console.log('if1');
+
+        if (render) {
+            console.log('if2');
+            const result = product.filter((item3) => {
+                return item3.category_name === props.data.search;
+            });
+            // console.log(result);
+            setProduct(result);
+            render = false;
+        } else {
+            console.log('else');
+            axios.get(url).then(response => {
+                //console.log(response.data);
+                setProduct(response.data.data);
+            }).catch((err) => {
+                // console.log(err);
+            });
+        }
+
+    }
+
+    if (product) {
+        // console.log(product);
+        productcontent = product.map((curItem) => {
+            // console.log(curItem.userId);
+            return <div className="col-xl-3 col-lg-4 col-md-4 col-12" key={curItem.category_id}>
+                <div className="single-product">
+                    <div className="product-img">
+                        <a>
+                            <img className="default-img" src={logo} alt="#" />
+                        </a>
+                        <div className="button-head">
+
+                            <div className="product-action">
+
+                                <div className="qty mt-5">
+                                    <button className="minus" onClick={() => {
+                                        showToast('minus', curItem);
+                                        handleClick(curItem.category_id, 'minus');
+                                        props.ramovefromocartHandler({ product_id: curItem.category_id })
+                                    }}>-</button>
+                                    <input type="text"
+                                        disabled={true}
+                                        value={getData()[curItem.category_id]}
+                                        className="countdown" />
+                                    <button className="plus btn-btn-primary" onClick={() => {
+                                        showToast('add', curItem);
+                                        handleClick(curItem.category_id, 'add');
+                                        props.addTocartHandler({ product_id: curItem.category_id, mrp: 6 + curItem.category_id, name: curItem.category_name, quantity: 1 });
+                                    }}>+</button>
+                                </div>
+
+                            </div>
+
+                            <div className="product-action-2">
+                            </div>
+                        </div>
+                    </div >
+                    <div className="product-content">
+                        <h3>
+                            <a href="#"> {curItem.category_name}</a>
+                            <a href="#"></a>
+                        </h3>
+                        <div className="product-price">
+                            <span>$ {curItem.category_id + 43}</span>
+                        </div>
+                    </div>
+                </div >
+            </div >
+        });
+    }
+
+    return (
+        <>
+            <Toaster />
+            {productcontent}
+        </>
+    )
+
+}
+
+export default Products;

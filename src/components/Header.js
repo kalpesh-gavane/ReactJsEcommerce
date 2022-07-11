@@ -1,15 +1,12 @@
 import '../App.css';
 import React, { useState, useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import '../index.css';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-//import SearchBar from './SearchBar';
-// import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import { useLocation } from "react-router-dom";
+import Toaster from './Toaster';
 
 const Header = (props) => {
 
@@ -17,6 +14,7 @@ const Header = (props) => {
   const statedata = JSON.parse(serializedState);
 
   const [count, setCount] = useState({ default: 0 });
+  const [value, setValue] = useState(null);
   const [myOptions, setMyOptions] = useState([]);
 
   const url = 'https://allcitysolution.com/api/categories';
@@ -143,25 +141,35 @@ const Header = (props) => {
     props.productFilterHandler(value);
   }
 
+  const ele = document.getElementsByClassName('MuiAutocomplete-clearIndicator');
+  if (ele) {
+    // ele.click = function fun() {
+    //   alert("hello");
+    // }
+    document.getElementsByClassName('MuiAutocomplete-clearIndicator').onclick = function fun() {
+      console.log(ele);
+    }
+  }
+
   const product_count = JSON.stringify(count);
   localStorage.setItem('counter', product_count);
+
+
+  const defaultProps = {
+    options: myOptions,
+    getOptionLabel: option => option.category_name
+  };
+
+  // const flatProps = {
+  //   options: myOptions.map(option => option.category_name)
+  // };
+
 
   //console.log(myOptions);
   return (
     <div>
 
-      <ToastContainer
-        position="top-center"
-        title='success'
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+      <Toaster/>
 
       <header className="header shop">
 
@@ -225,26 +233,15 @@ const Header = (props) => {
                     <form>
                       <div className='main_search' style={{ width: 400 }}>
                         <Autocomplete
-                          id="country-select-demo"
-                          sx={{ width: 400 }}
-                          options={myOptions}
-                          autoHighlight
-                          getOptionLabel={(option) => option.category_name}
-                          onChange={(event, value) => handleOnFocus(value.category_name)}
-                          renderOption={(props, option) => (
-                            <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                              {option.category_name}
-                            </Box>
-                          )}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                              label="Search Services"
-                              inputProps={{
-                                ...params.inputProps,
-                                autoComplete: 'new-password', // disable autocomplete and autofill
-                              }}
-                            />
+                          {...defaultProps}
+                          className='mt-0 mb-0 p-0'
+                          value={value}
+                          onChange={(event, newValue) => {
+                            setValue(newValue);
+                            handleOnFocus(newValue.category_name);
+                          }}
+                          renderInput={params => (
+                            <TextField {...params} className='mt-0 mb-0 p-0' label="Search Category" margin="normal" fullWidth />
                           )}
                         />
                       </div>
@@ -283,6 +280,7 @@ const Header = (props) => {
                           }
 
                         })()}
+
                       </div>
                       <ul className="shopping-list">
 
