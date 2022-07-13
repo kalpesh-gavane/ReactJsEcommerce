@@ -6,20 +6,24 @@ import axios from "axios";
 import '../index.css';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { useSearchParams } from 'react-router-dom';
 import Toaster from './Toaster';
 
 const Header = (props) => {
+  let [searchParams, setSearchParams] = useSearchParams();
 
   const serializedState = localStorage.getItem('state');
   const statedata = JSON.parse(serializedState);
 
-  const [count, setCount] = useState({ default: 0 });
+  const [count, setCount] = useState({});
   const [value, setValue] = useState(null);
   const [myOptions, setMyOptions] = useState([]);
 
   const url = 'https://allcitysolution.com/api/categories';
 
   useState(() => {
+
+
 
     const product_count = localStorage.getItem('counter');
     const counter2 = JSON.parse(product_count);
@@ -126,19 +130,20 @@ const Header = (props) => {
   }
 
   useEffect(() => {
+
     axios.get(url).then(response => {
       //  console.log('useEffect');
       setMyOptions(response.data.data);
     }).catch((err) => {
       console.log(err);
     });
-
   }, []);
 
-
   const handleOnFocus = (value) => {
-    // console.log(value);
-    props.productFilterHandler(value);
+    if (value)
+      setSearchParams({ q: value.category_name });
+    else
+      setSearchParams({ q: null });
   }
 
   const ele = document.getElementsByClassName('MuiAutocomplete-clearIndicator');
@@ -154,23 +159,14 @@ const Header = (props) => {
   const product_count = JSON.stringify(count);
   localStorage.setItem('counter', product_count);
 
-
   const defaultProps = {
     options: myOptions,
     getOptionLabel: option => option.category_name
   };
 
-  // const flatProps = {
-  //   options: myOptions.map(option => option.category_name)
-  // };
-
-
-  //console.log(myOptions);
   return (
     <div>
-
-      <Toaster/>
-
+      <Toaster />
       <header className="header shop">
 
         <div className="topbar">
@@ -238,7 +234,7 @@ const Header = (props) => {
                           value={value}
                           onChange={(event, newValue) => {
                             setValue(newValue);
-                            handleOnFocus(newValue.category_name);
+                            handleOnFocus(newValue);
                           }}
                           renderInput={params => (
                             <TextField {...params} className='mt-0 mb-0 p-0' label="Search Category" margin="normal" fullWidth />

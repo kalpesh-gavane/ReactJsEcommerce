@@ -4,12 +4,12 @@ import logo from './logo.svg';
 import { toast } from 'react-toastify';
 import Toaster from "./Toaster";
 import 'react-toastify/dist/ReactToastify.css';
-
-let render = true;
+import { useSearchParams } from 'react-router-dom';
 
 const Products = (props) => {
-    //console.log(props);
 
+    const [searchParams] = useSearchParams();
+    // console.log(searchParams.get('q'));
     const url = 'https://allcitysolution.com/api/categories';
 
     const getData = () => {
@@ -24,7 +24,16 @@ const Products = (props) => {
 
     let [counterhome, setCount] = useState(getData());
     let productcontent = null;
-    const [product, setProduct] = useState();
+    let [product, setProduct] = useState();
+
+    useEffect(() => {
+        axios.get(url).then(response => {
+            setProduct(response.data.data);
+        }).catch((err) => {
+            console.log(err);
+        });
+
+    }, []);
 
     useState(() => {
 
@@ -41,15 +50,6 @@ const Products = (props) => {
         }
 
     })
-
-    useEffect(() => {
-        axios.get(url).then(response => {
-            setProduct(response.data.data);
-        }).catch((err) => {
-            console.log(err);
-        });
-
-    }, []);
 
     const showToast = (type, curItem) => {
         //console.log(type);
@@ -108,28 +108,15 @@ const Products = (props) => {
 
     };
 
-    if (props.data.search === 'EVENT MANAGEMENT') {
-
-        console.log('if1');
-
-        if (render) {
-            console.log('if2');
+    if (searchParams.get('q') !== 'null') {
+        if (product !== undefined) {
             const result = product.filter((item3) => {
-                return item3.category_name === props.data.search;
+                return item3.category_name === searchParams.get('q');
             });
-            // console.log(result);
-            setProduct(result);
-            render = false;
-        } else {
-            console.log('else');
-            axios.get(url).then(response => {
-                //console.log(response.data);
-                setProduct(response.data.data);
-            }).catch((err) => {
-                // console.log(err);
-            });
+            product = result;
         }
-
+    } else {
+        product = product;
     }
 
     if (product) {

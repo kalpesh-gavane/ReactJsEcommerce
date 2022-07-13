@@ -2,8 +2,9 @@
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
-const Contact = () => {
 
+const Contact = () => {
+   
     return (
 
         <div>

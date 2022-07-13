@@ -2,6 +2,7 @@ import React from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import HomeProductContainer from "../containers/HomeProductContainer";
 
+
 const Home = (props) => {
 
   if (props.data.cartItems.length >= 0) {
